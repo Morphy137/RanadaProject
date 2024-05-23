@@ -680,7 +680,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1653555728}
         m_TargetAssemblyTypeName: Script.Interface.SoundManager, Assembly-CSharp
         m_MethodName: ChangeSFXVolume
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3774,7 +3774,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1653555728}
         m_TargetAssemblyTypeName: Script.Interface.SoundManager, Assembly-CSharp
         m_MethodName: ChangeBGMVolume
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

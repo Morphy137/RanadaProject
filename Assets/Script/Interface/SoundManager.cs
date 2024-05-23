@@ -26,6 +26,10 @@ namespace Script.Interface
     [SerializeField] private AudioClip clickSOUND; // sonido de click jijija
     [SerializeField] private AudioClip voiceSOUND; // proximamente supongo
     
+    [Header("Variables de Valor")]
+    private float bgmVolume;
+    private float sfxVolume;
+    
     public static SoundManager Instance { get; private set; }
     public AudioSource GetAudioSource() { return audioSource; }
     
@@ -49,26 +53,29 @@ namespace Script.Interface
     private void Start()
     {
       // Valores iniciales de los sliders
-      bgmSlider.value = PlayerPrefs.GetFloat("BGM", 0.8f);
-      sfxSlider.value = PlayerPrefs.GetFloat("SFX", 0.8f);
+      bgmVolume = PlayerPrefs.GetFloat("BGM", 0.8f);
+      sfxVolume = PlayerPrefs.GetFloat("SFX", 0.8f);
       
-      AudioListener.volume = bgmSlider.value;
-      AudioListener.volume = sfxSlider.value;
+      bgmSlider.value = bgmVolume;
+      sfxSlider.value = sfxVolume;
+
+      bgmSource.volume = bgmVolume;
+      sfxSource.volume = sfxVolume;
     }
 
     public void ChangeBGMVolume(float value)
     {
       // Cambia el volumen de la música de fondo
-      bgmSource.volume = value;
       PlayerPrefs.SetFloat("BGM", value);
+      bgmSource.volume = value;
       PlayerPrefs.Save();
     }
 
     public void ChangeSFXVolume(float value)
     {
       // Volumen de los efectos de sonido
-      sfxSource.volume = value;
       PlayerPrefs.SetFloat("SFX", value);
+      sfxSource.volume = value;
       PlayerPrefs.Save();
     }
     
