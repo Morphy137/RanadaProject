@@ -27,7 +27,7 @@ namespace Script.Player
       Animator comboAnimation = Instance.currentComboText.GetComponent<Animator>();
       Animator playerAnimation = Instance.playerPrefab.GetComponent<Animator>();
       comboScore += 1;
-      Score += 100 * (comboScore + 1);
+      Score += 10 * (comboScore + 1);
       Instance.hitSFX.Play();
 
       // Play Combo animation once

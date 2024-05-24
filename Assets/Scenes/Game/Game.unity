@@ -938,8 +938,8 @@ SpriteRenderer:
   m_SortingLayerID: -1146947245
   m_SortingLayer: 9
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0, g: 0.7725491, b: 0.9490197, a: 0.47058824}
+  m_Sprite: {fileID: 21300000, guid: d4b97759e4439794680a4ff539671e1d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1751,7 +1751,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8d9eb5e5986ec974fa5ad32d3be9e318, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -2226,8 +2226,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1852488845}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882147045 stripped
@@ -4288,37 +4287,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &1852488844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1852488845}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1852488845
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852488844}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 878342456}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1896150825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4610,8 +4578,8 @@ SpriteRenderer:
   m_SortingLayerID: -1146947245
   m_SortingLayer: 9
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.15686275, b: 0.8196079, a: 0.47058824}
+  m_Sprite: {fileID: 21300000, guid: d4b97759e4439794680a4ff539671e1d, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4902,8 +4870,8 @@ MonoBehaviour:
   objects:
   - {fileID: 440392379}
   - {fileID: 1941072859}
-  defaultSprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  pressedSprite: {fileID: -2135585597343286014, guid: 5aa8b770bc43046bc8d993d0d5b7f4a5, type: 3}
+  defaultSprite: {fileID: 21300000, guid: d4b97759e4439794680a4ff539671e1d, type: 3}
+  pressedSprite: {fileID: 21300000, guid: f9b82a2a3999d3944a36720c500bcb84, type: 3}
 --- !u!1001 &1614084197374590381
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5001,6 +4969,18 @@ PrefabInstance:
       propertyPath: PerfectPrefab
       value: 
       objectReference: {fileID: 1189547001}
+    - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
+      propertyPath: spriteOptions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
+      propertyPath: spriteOptions.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 292a401c22b5f1d4f8b17b1afc5e22d9, type: 3}
+    - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
+      propertyPath: spriteOptions.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e09c00a81bd01ae49944dbbb21ccfa7c, type: 3}
     - target: {fileID: 1645255493166857312, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
       propertyPath: m_Name
       value: Up
@@ -5425,6 +5405,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 984525818326409537, guid: 703da045d00013f498c07e1d29b98b9b, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2837647903203486769, guid: 703da045d00013f498c07e1d29b98b9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5566,6 +5550,18 @@ PrefabInstance:
       propertyPath: floatingTextSpawnPos.y
       value: -5.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
+      propertyPath: spriteOptions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
+      propertyPath: spriteOptions.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 292a401c22b5f1d4f8b17b1afc5e22d9, type: 3}
+    - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
+      propertyPath: spriteOptions.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e09c00a81bd01ae49944dbbb21ccfa7c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
