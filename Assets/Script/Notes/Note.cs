@@ -14,8 +14,7 @@ namespace Script.Notes
 
     void Update()
     {
-      double timeSinceInstantiated =
-        SongManager.GetAudioSourceTime() - timeInstantiated; // Get the time since the note was instantiated
+      double timeSinceInstantiated = SongManager.GetAudioSourceTime() - timeInstantiated; // Get the time since the note was instantiated
       float t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime * 2));
 
       if (t > 1)

@@ -4,7 +4,7 @@ namespace Script.Player
 {
   public class ScoreManager : MonoBehaviour
   {
-    public static ScoreManager Instance; // Singleton instance of the ScoreManager class
+    private static ScoreManager Instance; // Singleton instance of the ScoreManager class
     public AudioSource hitSFX; // Sound effect for a successful hit
     public AudioSource missSFX; // Sound effect for a miss
     public TMPro.TextMeshProUGUI currentComboText; // TextMeshPro component for displaying the current combo
@@ -13,19 +13,15 @@ namespace Script.Player
     static int comboScore; // Current combo score
     static int Score; // Total score
 
-    /**
-   * Start is called before the first frame update
-   */
-    void Start()
+    private void Start()
     {
       Instance = this;
       comboScore = 0;
       Score = 0;
     }
 
-    /**
-   * Hit function to be called when a note is hit
-   */
+    
+    // Se llama cuando se acierta una nota
     public static void Hit()
     {
       Animator comboAnimation = Instance.currentComboText.GetComponent<Animator>();
@@ -46,9 +42,7 @@ namespace Script.Player
       }
     }
 
-    /*
-     * Miss function to be called when a note is missed
-     */
+    // Se llama cuando se falla una nota
     public static void Miss(bool isInputMiss)
     {
       // Play Player miss animation

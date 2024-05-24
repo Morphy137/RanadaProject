@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +16,8 @@ namespace Script.Interface
     [Header("AudioSource")]
     [SerializeField] private AudioSource bgmSource; // AudioSource para la música de fondo
     [SerializeField] private AudioSource sfxSource; // AudioSource para los efectos de sonido
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource menuSource; // AudioSource para el menú
+    [SerializeField] private AudioSource audioSource; // extra click sound
     
     [Header("Musica asignables")]
     [SerializeField] private AudioClip menuMUSIC; // Música del menú
@@ -30,8 +32,12 @@ namespace Script.Interface
     private float bgmVolume;
     private float sfxVolume;
     
+    //Getter
     public static SoundManager Instance { get; private set; }
-    public AudioSource GetAudioSource() { return audioSource; }
+    public AudioSource GetMenuSource() { return menuSource; }
+    public AudioSource GetBgmSource() { return bgmSource; }
+    public AudioSource GetSfxSource() { return sfxSource; }
+    public AudioSource AudioSource() { return audioSource; }
     
     private void Awake()
     {
@@ -46,7 +52,10 @@ namespace Script.Interface
         audioSource = gameObject.AddComponent<AudioSource>();
       }
       
+      // Asignamos la musica predefinida
+      menuSource.clip = pauseMUSIC;
       audioSource.clip = clickSOUND;
+      
       SceneManager.sceneLoaded += OnSceneLoaded;
     }
     
@@ -94,6 +103,7 @@ namespace Script.Interface
           break;
         case "Credits":
           bgmSource.clip = menuMUSIC;
+          bgmSource.loop = true;
           bgmSource.Play();
           break;
         default:
@@ -102,22 +112,31 @@ namespace Script.Interface
       }
       
     }
-    
-    public AudioSource GetBgmSource() 
-    {
-      return bgmSource;
-    }
 
     public void PlayPauseMusic()
     {
-      bgmSource.clip = pauseMUSIC;
+      audioSource.clip = pauseMUSIC;
       bgmSource.loop = true;
       bgmSource.Play();
     }
 
     public void PlayClickSound()
     {
-      audioSource.PlayOneShot(clickSOUND);
+      sfxSource.PlayOneShot(clickSOUND);
+    }
+    
+    public IEnumerator AdjustVolumeOverTime(AudioSource audioSource, float volumeChangeSpeed, float targetVolume)
+    {
+      // Si volumeChangeSpeed es positivo, aumenta el volumen
+      // Si volumeChangeSpeed es negativo, disminuye el volumen
+      while ((volumeChangeSpeed > 0 && audioSource.volume < targetVolume) || (volumeChangeSpeed < 0 && audioSource.volume > targetVolume))
+      {
+        audioSource.volume += volumeChangeSpeed * Time.unscaledDeltaTime;
+        yield return null;
+      }
+
+      // Asegúrate de que el volumen llegue a targetVolume
+      audioSource.volume = targetVolume;
     }
   }
 }

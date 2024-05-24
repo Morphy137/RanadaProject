@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using Script.Interface;
+﻿using Script.Interface;
 using Script.Notes;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,24 +10,25 @@ namespace Script.Player
     [Header("Objetos")] 
     [SerializeField] private Lane lane1;
     [SerializeField] private Lane lane2;
+    
+    [Header("Componentes")]
     [SerializeField] private MenuPause menuPause;
-    [SerializeField] private SoundManager soundManager;
-    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private GameObject[] objects; // Arreglo de hijos
     
-    [Header("Sprites")] 
+    private PlayerInput playerInput;
+    
+    [Header("Sprites para cambiar")] 
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite pressedSprite;
-
+    
     private bool lane1KeyPressed;
     private bool lane2KeyPressed;
-
+    
     private SpriteRenderer[] spriteRenderers;
     
     private void Awake()
     {
       playerInput = new PlayerInput();
-      soundManager = SoundManager.Instance;
       
       playerInput.Player.Lane1Key.performed += ctx => lane1.OnInputPressed();
       

@@ -10,10 +10,9 @@ namespace Script.Notes
   public class Lane : MonoBehaviour
   {
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
-    public KeyCode input;
     public GameObject notePrefab;
-    List<Note> notes = new List<Note>();
-    public List<double> timeStamps = new List<double>();
+    public List<Note> notes = new();
+    public List<double> timeStamps = new();
 
     // Floating Text Prefabs
     public GameObject PerfectPrefab;
@@ -21,10 +20,7 @@ namespace Script.Notes
     public GameObject GoodPrefab;
     public GameObject MissPrefab;
     
-    // Floating Text Spawn Position
-    [SerializeField] private float positionSpawnX = 30f;
-    [SerializeField] private float positionSpawnY = 20.4f;
-    [SerializeField] private Vector3 floatingTextSpawnPos;
+    private Vector3 ratingSpawnPos = new(-12f, 2f, 0f);
     
     // Sprite Options
     public Sprite[] spriteOptions;
@@ -36,11 +32,6 @@ namespace Script.Notes
     private bool isCooldownActive;
     private float cooldownDuration = 0.5f;
     private float cooldownTimer;
-
-    private void Awake()
-    {
-      floatingTextSpawnPos = new Vector3(positionSpawnX, positionSpawnY, 0f);
-    }
 
     public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
@@ -74,7 +65,7 @@ namespace Script.Notes
           {
             int randomIndex = UnityEngine.Random.Range(0, spriteOptions.Length);
             note.GetComponent<SpriteRenderer>().sprite = spriteOptions[randomIndex];
-            note.GetComponent<SpriteRenderer>().sortingOrder = 14;
+            note.GetComponent<SpriteRenderer>().sortingOrder = 10;
           }
           spawnIndex++;
         }
@@ -142,22 +133,25 @@ namespace Script.Notes
     private void Hit(float position)
     {
       ScoreManager.Hit();
-      GameObject floatingText;
-
+      GameObject prefab;
+      
       if (position <= 0.5 && position >= -0.5)
       {
-        floatingText = Instantiate(PerfectPrefab, floatingTextSpawnPos, Quaternion.identity);
+        prefab = Instantiate(PerfectPrefab, ratingSpawnPos, Quaternion.identity);
+        StartCoroutine(AnimatePrefab(prefab));
       }
-      else if (position <= 1 && position >= -1)
+      else if (position is <= 1 and >= -1)
       {
-        floatingText = Instantiate(GreatPrefab, floatingTextSpawnPos, Quaternion.identity);
+        prefab = Instantiate(GreatPrefab, ratingSpawnPos, Quaternion.identity);
+        StartCoroutine(AnimatePrefab(prefab));
       }
       else
       {
-        floatingText = Instantiate(GoodPrefab, floatingTextSpawnPos, Quaternion.identity);
+        prefab = Instantiate(GoodPrefab, ratingSpawnPos, Quaternion.identity);
+        StartCoroutine(AnimatePrefab(prefab));
       }
 
-      StartCoroutine(DestroyAfterDelay(floatingText, 3f));
+      StartCoroutine(DestroyAfterDelay(prefab, 3f));
     }
 
     /*
@@ -167,15 +161,43 @@ namespace Script.Notes
     {
       ScoreManager.Miss(isInputMiss);
       // Floating Text for Miss
-      GameObject floatingText = Instantiate(MissPrefab, floatingTextSpawnPos, Quaternion.identity);
-      StartCoroutine(DestroyAfterDelay(floatingText, 3f));
+      GameObject prefab = Instantiate(MissPrefab, ratingSpawnPos, Quaternion.identity);
+      StartCoroutine(AnimatePrefab(prefab));
+      StartCoroutine(DestroyAfterDelay(prefab, 3f));
     }
 
-    /*
-     * Destroy the GameObject after a delay
-     * @param gameObjectToDestroy: The GameObject to destroy
-     * @param delay: The delay in seconds
-     */
+    
+    private IEnumerator AnimatePrefab(GameObject prefab)
+    {
+      float duration = 1f; // Duración de la animación en segundos
+      float elapsed = 0f; // Tiempo transcurrido desde el inicio de la animación
+
+      Vector3 initialScale = prefab.transform.localScale; // Escala inicial del prefab
+      Vector3 targetScale = initialScale * 1.4f; // Escala final del prefab
+
+      Vector3 initialPosition = prefab.transform.position; // Posición inicial del prefab
+      Vector3 targetPosition = initialPosition + new Vector3(2, 2, 0); // Posición final del prefab
+
+      while (elapsed < duration)
+      {
+        elapsed += Time.deltaTime; // Actualiza el tiempo transcurrido
+        float t = elapsed / duration; // Calcula la fracción del tiempo transcurrido
+
+        // Interpola la escala y la posición del prefab
+        prefab.transform.localScale = Vector3.Lerp(initialScale, targetScale, t);
+        prefab.transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+
+        yield return null; // Espera hasta el próximo frame
+      }
+
+      // Asegura que la escala y la posición del prefab sean exactamente las deseadas al final de la animación
+      prefab.transform.localScale = targetScale;
+      prefab.transform.position = targetPosition;
+
+      // Destruye el prefab
+      Destroy(prefab);
+    }
+    
     private IEnumerator DestroyAfterDelay(GameObject gameObjectToDestroy, float delay)
     {
       // Wait for the specified delay

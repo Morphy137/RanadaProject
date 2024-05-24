@@ -2874,7 +2874,8 @@ MonoBehaviour:
   sfxSlider: {fileID: 475581184}
   bgmSource: {fileID: 1945097819}
   sfxSource: {fileID: 930283866}
-  audioSource: {fileID: 1329894069}
+  menuSource: {fileID: 1329894069}
+  audioSource: {fileID: 1653555729}
   menuMUSIC: {fileID: 8300000, guid: 8670d37b84e0bf94b8efed398285d743, type: 3}
   gameMUSIC: {fileID: 8300000, guid: 1d86c02511e2d9e469f8716be2c3e23b, type: 3}
   pauseMUSIC: {fileID: 8300000, guid: 36757904a510b8b41be6d2911ba21bd9, type: 3}

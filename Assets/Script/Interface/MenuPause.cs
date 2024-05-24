@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro;
@@ -13,15 +14,23 @@ namespace Script.Interface
     [SerializeField] private GameObject menuOption;
     [SerializeField] private GameObject countDownTimer;
     
-    [Header("Cancion para el manu de pausa")]
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource bgmSource;
+    private AudioSource menuSource;
+    private Coroutine volumeCoroutine;
     
     [Header("Texto en pantalla")]
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private float resumeDelay = 3f;
     
     private bool _isPaused;
+
+    private void Start()
+    {
+      menuSource = SoundManager.Instance.GetMenuSource();
+      bgmSource = SoundManager.Instance.GetBgmSource();
+    }
     
+
     public void TogglePause()
     {
       if (_isPaused)
@@ -37,8 +46,14 @@ namespace Script.Interface
     public void Pause()
     {
       _isPaused = true;
-      Time.timeScale = 0; // pause
-      audioSource.Pause();
+      Time.timeScale = 0; // pause el juego
+      bgmSource.Pause(); // Pausa la música de fondo
+      
+      // Musica del menu de pausa
+      menuSource.volume = 0; // Asegúrate de que el volumen inicial es 0
+      menuSource.Play();
+      StartCoroutine(SoundManager.Instance.AdjustVolumeOverTime(menuSource, 0.1f, 0.5f));      
+      // Muestra el menú de pausa
       menuGame.SetActive(true);
     }
 
@@ -47,7 +62,9 @@ namespace Script.Interface
       menuOption.SetActive(false);
       menuPause.SetActive(false);
       countDownTimer.SetActive(true);
+      volumeCoroutine = StartCoroutine(SoundManager.Instance.AdjustVolumeOverTime(menuSource, -0.4f, 0));
       StartCoroutine(ResumeAfterDelay(resumeDelay));
+      
     }
 
     private IEnumerator ResumeAfterDelay(float delay)
@@ -69,7 +86,19 @@ namespace Script.Interface
       
       _isPaused = false;
       Time.timeScale = 1; // resume
-      audioSource.UnPause();
+      
+      // Musica
+      bgmSource.UnPause();
+      menuSource.Stop();
+      
+      // Solucion bug de volumen disminuyendo infinito
+      if (volumeCoroutine != null)
+      {
+        StopCoroutine(volumeCoroutine);
+        volumeCoroutine = null;
+      }
+      
+      // Menu
       menuGame.SetActive(false);
     }
     
@@ -82,8 +111,12 @@ namespace Script.Interface
     
     public void Quit()
     {
+      menuSource.Stop();
+      
       // Carga el menú principal
       SceneManager.LoadScene("MenuPrincipal");
     }
+    
+    
   }
 }
