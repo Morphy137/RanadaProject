@@ -5397,6 +5397,10 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
+      propertyPath: midiFileAsset
+      value: 
+      objectReference: {fileID: 10900000, guid: c334973cef89a9840b0b0c507e0377ab, type: 3}
+    - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
       propertyPath: lanes.Array.data[0]
       value: 
       objectReference: {fileID: 460683200}

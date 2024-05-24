@@ -16,7 +16,7 @@ namespace Script.Notes
     public double marginOfError; // in seconds
     
     // Ruta de los archivos MIDI
-    private const string DirectoryFile = "/Audio/MIDI_Files/";
+    private const string DirectoryFile = "/StreamingAssets/MIDI_Files/";
 
     public int inputDelayInMilliseconds;
     

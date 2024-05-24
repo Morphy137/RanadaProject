@@ -106,6 +106,11 @@ namespace Script.Interface
     {
       _isPaused = false;
       Time.timeScale = 1;
+      
+      //Musica detener
+      menuSource.Stop();
+      bgmSource.Stop();
+      
       SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     
