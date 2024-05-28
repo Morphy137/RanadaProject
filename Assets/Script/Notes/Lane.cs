@@ -137,16 +137,19 @@ namespace Script.Notes
       
       if (position <= 0.5 && position >= -0.5)
       {
+        GlobalScore.perfectHits++;
         prefab = Instantiate(PerfectPrefab, ratingSpawnPos, Quaternion.identity);
         StartCoroutine(AnimatePrefab(prefab));
       }
       else if (position is <= 1 and >= -1)
       {
+        GlobalScore.greatHits++;
         prefab = Instantiate(GreatPrefab, ratingSpawnPos, Quaternion.identity);
         StartCoroutine(AnimatePrefab(prefab));
       }
       else
       {
+        GlobalScore.gooodHits++;
         prefab = Instantiate(GoodPrefab, ratingSpawnPos, Quaternion.identity);
         StartCoroutine(AnimatePrefab(prefab));
       }
@@ -160,6 +163,7 @@ namespace Script.Notes
     private void Miss(bool isInputMiss)
     {
       ScoreManager.Miss(isInputMiss);
+      GlobalScore.missesHit++;
       // Floating Text for Miss
       GameObject prefab = Instantiate(MissPrefab, ratingSpawnPos, Quaternion.identity);
       StartCoroutine(AnimatePrefab(prefab));
