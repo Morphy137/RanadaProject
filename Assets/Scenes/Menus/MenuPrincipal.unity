@@ -2876,9 +2876,9 @@ MonoBehaviour:
   sfxSource: {fileID: 930283866}
   menuSource: {fileID: 1329894069}
   audioSource: {fileID: 1653555729}
-  menuMUSIC: {fileID: 8300000, guid: 8670d37b84e0bf94b8efed398285d743, type: 3}
+  menuMUSIC: {fileID: 8300000, guid: abe71110b28424103b7c414d75d69fde, type: 3}
   gameMUSIC: {fileID: 8300000, guid: 1d86c02511e2d9e469f8716be2c3e23b, type: 3}
-  pauseMUSIC: {fileID: 8300000, guid: 36757904a510b8b41be6d2911ba21bd9, type: 3}
+  pauseMUSIC: {fileID: 8300000, guid: f5578bd1be57f458c898826285214c8d, type: 3}
   clickSOUND: {fileID: 8300000, guid: 02fcde9f0b375944d9aacbf7f1ed998f, type: 3}
   voiceSOUND: {fileID: 8300000, guid: 3e18c6fcea0d83346acb27feabbb470e, type: 3}
 --- !u!82 &1653555729

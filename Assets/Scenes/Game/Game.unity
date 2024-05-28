@@ -5370,7 +5370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
       propertyPath: fileLocation
-      value: midi_dificil.mid
+      value: MIDI_FILE.mid
       objectReference: {fileID: 0}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
       propertyPath: marginOfError
@@ -5409,6 +5409,10 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 984525818326409537, guid: 703da045d00013f498c07e1d29b98b9b, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 88447cab425104d2aa90170ab42c112b, type: 3}
     - target: {fileID: 2837647903203486769, guid: 703da045d00013f498c07e1d29b98b9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
