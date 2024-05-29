@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Melanchall.DryWetMidi.Interaction;
 using Script.Player;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Script.Notes
 {
@@ -168,6 +169,9 @@ namespace Script.Notes
       GameObject prefab = Instantiate(MissPrefab, ratingSpawnPos, Quaternion.identity);
       StartCoroutine(AnimatePrefab(prefab));
       StartCoroutine(DestroyAfterDelay(prefab, 3f));
+      //if (inputIndex >= 125) {
+      //  SceneManager.LoadScene("MenuPrincipal");
+      //}
     }
 
     

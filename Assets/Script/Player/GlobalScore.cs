@@ -10,4 +10,5 @@ public class GlobalScore : MonoBehaviour
     public static int perfectHits;
     public static int greatHits;
     public static int gooodHits;
+    public static int totalNotes;
 }

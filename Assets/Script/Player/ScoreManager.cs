@@ -10,14 +10,18 @@ namespace Script.Player
     public TMPro.TextMeshProUGUI currentComboText; // TextMeshPro component for displaying the current combo
     public TMPro.TextMeshProUGUI scoreText; // TextMeshPro component for displaying the score
     public GameObject playerPrefab;
-    static int comboScore; // Current combo score
-    static int Score; // Total score
 
     private void Start()
     {
       Instance = this;
-      comboScore = 0;
-      Score = 0;
+      GlobalScore.score = 0;
+      GlobalScore.totalCombo = 0;
+      GlobalScore.currentCombo = 0;
+      GlobalScore.highestCombo = 0;
+      GlobalScore.missesHit = 0;
+      GlobalScore.perfectHits = 0;
+      GlobalScore.greatHits = 0;
+      GlobalScore.gooodHits = 0;
     }
 
     
@@ -26,8 +30,10 @@ namespace Script.Player
     {
       Animator comboAnimation = Instance.currentComboText.GetComponent<Animator>();
       Animator playerAnimation = Instance.playerPrefab.GetComponent<Animator>();
-      comboScore += 1;
-      Score += 10 * (comboScore + 1);
+      GlobalScore.totalCombo += 1;
+      GlobalScore.currentCombo += 1;
+      GlobalScore.highestCombo = GlobalScore.currentCombo > GlobalScore.highestCombo ? GlobalScore.currentCombo : GlobalScore.highestCombo;
+      GlobalScore.score += 10 * (GlobalScore.currentCombo + 1);
       Instance.hitSFX.Play();
 
       // Play Combo animation once
@@ -55,14 +61,14 @@ namespace Script.Player
           playerAnimation.Play("Rana_fail_miss", -1, 0f);
       }
 
-      comboScore = 0;
+      GlobalScore.currentCombo = 0;
       Instance.missSFX.Play();
     }
 
     private void Update()
     {
-      currentComboText.text = comboScore.ToString(); // Update the combo text display
-      scoreText.text = Score.ToString(); // Update the score text display
+      currentComboText.text = GlobalScore.currentCombo.ToString(); // Update the combo text display
+      scoreText.text = GlobalScore.score.ToString(); // Update the score text display
     }
   }
 }
