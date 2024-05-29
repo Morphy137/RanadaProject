@@ -63,6 +63,7 @@ namespace Script.Notes
 
       foreach (var lane in lanes) lane.SetTimeStamps(array);
 
+      GlobalScore.totalNotes = notes.Count;
       Invoke(nameof(StartSong), songDelayInSeconds);
     }
 
