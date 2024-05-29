@@ -1749,7 +1749,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8d9eb5e5986ec974fa5ad32d3be9e318, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 421f3ea37c34247d3829b6ce6d668e5b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -5370,7 +5370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
       propertyPath: fileLocation
-      value: MIDI_FILE.mid
+      value: MIDI_NOTES.mid
       objectReference: {fileID: 0}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
       propertyPath: marginOfError
@@ -5412,7 +5412,7 @@ PrefabInstance:
     - target: {fileID: 984525818326409537, guid: 703da045d00013f498c07e1d29b98b9b, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 88447cab425104d2aa90170ab42c112b, type: 3}
+      objectReference: {fileID: 8300000, guid: a21408a44e723433ab4164fb7a3cfef6, type: 3}
     - target: {fileID: 2837647903203486769, guid: 703da045d00013f498c07e1d29b98b9b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
