@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5513666105335919184}
   - component: {fileID: 4533799184672520758}
+  - component: {fileID: 8206596270299559526}
   m_Layer: 0
   m_Name: MoteHuesillo
   m_TagString: Untagged
@@ -39,7 +40,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 666710737209398110}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8206596270299559526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666710737209398110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e45517e67e5a47a48893d9bf758ab620, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  assignedTime: 0

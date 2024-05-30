@@ -13,6 +13,7 @@ namespace Script.Notes
     public Melanchall.DryWetMidi.MusicTheory.NoteName noteRestriction;
     public GameObject notePrefab;
     public List<Note> notes = new();
+    public List<Note> foods = new();
     public List<double> timeStamps = new();
 
     // Floating Text Prefabs
@@ -20,6 +21,10 @@ namespace Script.Notes
     public GameObject GreatPrefab;
     public GameObject GoodPrefab;
     public GameObject MissPrefab;
+    // Circle Prefab
+    public GameObject circlePrefab;
+    // Food Prefab
+    [SerializeField] private List<GameObject> foodPrefabs; // Lista de prefabs de comida
     
     private Vector3 ratingSpawnPos = new(-12f, 2f, 0f);
     
@@ -61,6 +66,12 @@ namespace Script.Notes
           notes.Add(note.GetComponent<Note>());
           note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex];
 
+          GameObject foodPrefab = foodPrefabs[UnityEngine.Random.Range(0, foodPrefabs.Count)];
+          var food = Instantiate(foodPrefab, new Vector3(note.transform.position.x, -8.5f, note.transform.position.z), Quaternion.identity);
+          var foodNote = food.GetComponentInChildren<Note>();
+          foods.Add(foodNote);
+          foodNote.assignedTime = (float)timeStamps[spawnIndex];
+
           // Set the sprite of the note
           if (spriteOptions.Length > 0)
           {
@@ -88,6 +99,7 @@ namespace Script.Notes
             Hit(notes[inputIndex].gameObject.transform.position.x + 4);
             Debug.Log($"Hit on {inputIndex} note");
             Destroy(notes[inputIndex].gameObject);
+            Destroy(foods[inputIndex].gameObject);
             inputIndex++;
           }
           else if (!isCooldownActive)
@@ -135,24 +147,30 @@ namespace Script.Notes
     {
       ScoreManager.Hit();
       GameObject prefab;
-      
+      Animator circleAnimation = circlePrefab.GetComponent<Animator>();
+
+      if (circleAnimation != null)
+      {
+        circleAnimation.Play("hit", -1, 0f);
+      }
+
       if (position <= 0.5 && position >= -0.5)
       {
         GlobalScore.perfectHits++;
         prefab = Instantiate(PerfectPrefab, ratingSpawnPos, Quaternion.identity);
-        StartCoroutine(AnimatePrefab(prefab));
+        //StartCoroutine(AnimatePrefab(prefab));
       }
       else if (position is <= 1 and >= -1)
       {
         GlobalScore.greatHits++;
         prefab = Instantiate(GreatPrefab, ratingSpawnPos, Quaternion.identity);
-        StartCoroutine(AnimatePrefab(prefab));
+        //StartCoroutine(AnimatePrefab(prefab));
       }
       else
       {
         GlobalScore.gooodHits++;
         prefab = Instantiate(GoodPrefab, ratingSpawnPos, Quaternion.identity);
-        StartCoroutine(AnimatePrefab(prefab));
+        //StartCoroutine(AnimatePrefab(prefab));
       }
 
       StartCoroutine(DestroyAfterDelay(prefab, 3f));
@@ -167,7 +185,7 @@ namespace Script.Notes
       GlobalScore.missesHit++;
       // Floating Text for Miss
       GameObject prefab = Instantiate(MissPrefab, ratingSpawnPos, Quaternion.identity);
-      StartCoroutine(AnimatePrefab(prefab));
+      //StartCoroutine(AnimatePrefab(prefab));
       StartCoroutine(DestroyAfterDelay(prefab, 3f));
       //if (inputIndex >= 125) {
       //  SceneManager.LoadScene("MenuPrincipal");
