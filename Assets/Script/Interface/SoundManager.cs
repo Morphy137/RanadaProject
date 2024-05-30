@@ -39,6 +39,8 @@ namespace Script.Interface
     public AudioSource GetSfxSource() { return sfxSource; }
     public AudioSource AudioSource() { return audioSource; }
     
+    private bool hasGameStarted = false;
+
     private void Awake()
     {
       if (Instance == null)
@@ -51,7 +53,7 @@ namespace Script.Interface
       {
         audioSource = gameObject.AddComponent<AudioSource>();
       }
-      
+
       // Asignamos la musica predefinida
       menuSource.clip = pauseMUSIC;
       audioSource.clip = clickSOUND;
@@ -88,6 +90,7 @@ namespace Script.Interface
       PlayerPrefs.Save();
     }
     
+    
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
       // Cambia la música de fondo dependiendo de la escena
@@ -100,8 +103,16 @@ namespace Script.Interface
           break;
         case "Game":
           bgmSource.clip = gameMUSIC;
+          bgmSource.loop = false;
+          bgmSource.Play();// para que cuando termine la cancion se vaya a la pantalla de score
+          hasGameStarted = true;
           break;
         case "Credits":
+          bgmSource.clip = menuMUSIC;
+          bgmSource.loop = true;
+          bgmSource.Play();
+          break;
+        case "ScoreScreen":
           bgmSource.clip = menuMUSIC;
           bgmSource.loop = true;
           bgmSource.Play();
@@ -111,6 +122,12 @@ namespace Script.Interface
           break;
       }
       
+    }
+    void Update()
+    {
+        if (hasGameStarted && !bgmSource.isPlaying) {
+            SceneManager.LoadScene("ScoreScreen");
+        }
     }
 
     public void PlayPauseMusic()
