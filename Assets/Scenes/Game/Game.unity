@@ -5370,7 +5370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
       propertyPath: fileLocation
-      value: MIDI_FILE.mid
+      value: MIDI_NOTES_2.mid
       objectReference: {fileID: 0}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
       propertyPath: marginOfError
