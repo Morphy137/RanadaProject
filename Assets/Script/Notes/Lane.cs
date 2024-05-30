@@ -187,8 +187,8 @@ namespace Script.Notes
       GameObject prefab = Instantiate(MissPrefab, ratingSpawnPos, Quaternion.identity);
       //StartCoroutine(AnimatePrefab(prefab));
       StartCoroutine(DestroyAfterDelay(prefab, 3f));
-      //if (inputIndex >= 125) {
-      //  SceneManager.LoadScene("MenuPrincipal");
+      //if (inputIndex >= 15) {
+        //SceneManager.LoadScene("ScoreScreen");
       //}
     }
 
