@@ -96,10 +96,12 @@ namespace Script.Notes
         {
           if (Math.Abs(audioTime - timeStamp) < marginOfError)
           {
+            Animator foodAnimation = foods[inputIndex].GetComponent<Animator>();
             Hit(notes[inputIndex].gameObject.transform.position.x + 4);
             Debug.Log($"Hit on {inputIndex} note");
             Destroy(notes[inputIndex].gameObject);
-            Destroy(foods[inputIndex].gameObject);
+            foods[inputIndex].movementEnabled = false;
+            StartCoroutine(DestroyAfterDelay(foods[inputIndex].gameObject, 0.20f));
             inputIndex++;
           }
           else if (!isCooldownActive)
