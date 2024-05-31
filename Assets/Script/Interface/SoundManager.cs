@@ -133,6 +133,15 @@ namespace Script.Interface
       sfxSource.PlayOneShot(clickSOUND);
     }
     
+    public void ResetAudioSource()
+    {
+      if (bgmSource != null)
+      {
+        bgmSource.Stop();
+        bgmSource.Play();
+      }
+    }
+    
     public IEnumerator AdjustVolumeOverTime(AudioSource audioSource, float volumeChangeSpeed, float targetVolume)
     {
       // Si volumeChangeSpeed es positivo, aumenta el volumen

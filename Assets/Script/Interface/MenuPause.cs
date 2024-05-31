@@ -119,6 +119,8 @@ namespace Script.Interface
     public void Quit()
     {
       menuSource.Stop();
+      _isPaused = false;
+      Time.timeScale = 1;
       
       // Carga el menú principal
       SceneManager.LoadScene("MenuPrincipal");

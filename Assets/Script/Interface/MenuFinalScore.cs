@@ -8,14 +8,14 @@ using UnityEngine.UI;
 
 namespace Script.Interface
 {
-  public class MenuFianlScore : MonoBehaviour
+  public class MenuFinalScore : MonoBehaviour
   {
     
     private String _sceneGame = "Game";
     private string _sceneMenuPrincipal = "MenuPrincipal";
     private Dictionary<GameObject, Vector3> originalScales = new Dictionary<GameObject, Vector3>();
     
-    private static MenuFianlScore instance;
+    private static MenuFinalScore instance;
     
     private void Awake()
     {
@@ -54,8 +54,8 @@ namespace Script.Interface
     {
       StartCoroutine(ChangeSpriteWithDelay(button, 0.1f));
     }
-    
-    public IEnumerator ChangeSpriteWithDelay(GameObject button, float waitTime)
+
+    private IEnumerator ChangeSpriteWithDelay(GameObject button, float waitTime)
     {
       // Guardar la escala original del botón si no se ha guardado antes
       if (!originalScales.ContainsKey(button))

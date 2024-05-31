@@ -35,14 +35,20 @@ namespace Script.Interface
     
     public void ContinueGame()
     {
+      Time.timeScale = 1;
+      
       Debug.Log("Continue Game");
-      SceneManager.LoadScene("Game");
+      SceneManager.LoadScene(_sceneGame);
     }
     
     public void NewGame()
     {
+      Time.timeScale = 1;
+      
       Debug.Log(_sceneGame);
+      SoundManager.Instance.ResetAudioSource();
       SceneManager.LoadScene(_sceneGame);
+      
     }
     
     public void CreditsScene()
@@ -61,8 +67,8 @@ namespace Script.Interface
     {
       StartCoroutine(ChangeSpriteWithDelay(button, 0.1f));
     }
-    
-    public IEnumerator ChangeSpriteWithDelay(GameObject button, float waitTime)
+
+    private IEnumerator ChangeSpriteWithDelay(GameObject button, float waitTime)
     {
       // Guardar la escala original del botón si no se ha guardado antes
       if (!originalScales.ContainsKey(button))
