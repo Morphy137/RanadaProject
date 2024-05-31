@@ -38,8 +38,6 @@ namespace Script.Interface
     public AudioSource GetBgmSource() { return bgmSource; }
     public AudioSource GetSfxSource() { return sfxSource; }
     public AudioSource AudioSource() { return audioSource; }
-    
-    private bool hasGameStarted = false;
 
     private void Awake()
     {
@@ -104,8 +102,7 @@ namespace Script.Interface
         case "Game":
           bgmSource.clip = gameMUSIC;
           bgmSource.loop = false;
-          bgmSource.Play();// para que cuando termine la cancion se vaya a la pantalla de score
-          hasGameStarted = true;
+          bgmSource.Play();
           break;
         case "Credits":
           bgmSource.clip = menuMUSIC;
@@ -122,12 +119,6 @@ namespace Script.Interface
           break;
       }
       
-    }
-    void Update()
-    {
-        if (hasGameStarted && !bgmSource.isPlaying) {
-            SceneManager.LoadScene("ScoreScreen");
-        }
     }
 
     public void PlayPauseMusic()

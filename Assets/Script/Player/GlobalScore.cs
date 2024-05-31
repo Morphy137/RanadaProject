@@ -12,15 +12,3 @@ public class GlobalScore : MonoBehaviour
     public static int gooodHits;
     public static int totalNotes;
 }
-
-
-
-public class ScoreDisplay : MonoBehaviour
-{
-    public Text scoreText;
-
-    void Update()
-    {
-        scoreText.text = "Score: " + GlobalScore.score.ToString();
-    }
-}

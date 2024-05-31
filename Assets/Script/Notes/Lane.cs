@@ -83,6 +83,7 @@ namespace Script.Notes
         }
       }
     }
+    
 
     private void HandleNoteInput(bool inputPressed)
     {

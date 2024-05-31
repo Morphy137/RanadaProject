@@ -9,7 +9,7 @@ namespace Script.Interface
   public class MenuPause : MonoBehaviour
   {
     [Header("Objetos de la interfaz")]
-    [SerializeField] private GameObject menuGame;
+    [SerializeField] private GameObject pauseButton;
     [SerializeField] private GameObject menuPause;
     [SerializeField] private GameObject menuOption;
     [SerializeField] private GameObject countDownTimer;
@@ -53,8 +53,10 @@ namespace Script.Interface
       menuSource.volume = 0; // Asegúrate de que el volumen inicial es 0
       menuSource.Play();
       StartCoroutine(SoundManager.Instance.AdjustVolumeOverTime(menuSource, 0.1f, 0.5f));      
+      
       // Muestra el menú de pausa
-      menuGame.SetActive(true);
+      menuPause.SetActive(true);
+      pauseButton.SetActive(false);
     }
 
     public void Resume()
@@ -64,7 +66,6 @@ namespace Script.Interface
       countDownTimer.SetActive(true);
       volumeCoroutine = StartCoroutine(SoundManager.Instance.AdjustVolumeOverTime(menuSource, -0.4f, 0));
       StartCoroutine(ResumeAfterDelay(resumeDelay));
-      
     }
 
     private IEnumerator ResumeAfterDelay(float delay)
@@ -99,7 +100,8 @@ namespace Script.Interface
       }
       
       // Menu
-      menuGame.SetActive(false);
+      menuPause.SetActive(false);
+      pauseButton.SetActive(true);
     }
     
     public void Restart()

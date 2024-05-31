@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Script.Animation;
+using UnityEngine;
 
 namespace Script.Player
 {
@@ -30,10 +31,22 @@ namespace Script.Player
     {
       Animator comboAnimation = Instance.currentComboText.GetComponent<Animator>();
       Animator playerAnimation = Instance.playerPrefab.GetComponent<Animator>();
-      GlobalScore.totalCombo += 1;
+      
       GlobalScore.currentCombo += 1;
       GlobalScore.highestCombo = GlobalScore.currentCombo > GlobalScore.highestCombo ? GlobalScore.currentCombo : GlobalScore.highestCombo;
-      GlobalScore.score += 10 * (GlobalScore.currentCombo + 1);
+      
+      if (GlobalScore.currentCombo >= 5)
+      {
+        GlobalScore.totalCombo += 1;
+        GlobalScore.score += 10 * GlobalScore.currentCombo;
+      }
+      else
+      {
+        GlobalScore.score += 10;
+      }
+      
+      // Llama al método Pulse
+      ScorePulse.Instance.Pulse();
       Instance.hitSFX.Play();
 
       // Play Combo animation once
@@ -67,7 +80,15 @@ namespace Script.Player
 
     private void Update()
     {
-      currentComboText.text = GlobalScore.currentCombo.ToString(); // Update the combo text display
+      if (GlobalScore.currentCombo >= 5)
+      {
+        currentComboText.text = GlobalScore.currentCombo.ToString(); // Update the combo text display
+      }
+      else
+      {
+        currentComboText.text = "0"; // Hide the combo text display
+      }
+      
       scoreText.text = GlobalScore.score.ToString(); // Update the score text display
     }
   }
