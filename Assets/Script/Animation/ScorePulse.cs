@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Script.Animation
@@ -9,6 +10,10 @@ namespace Script.Animation
     [SerializeField] private float maxScale = 1.2f; // escala máxima del pulso
     public static ScorePulse Instance;
     private bool isPulsing;
+
+    // Lista de GameObjects a los que se les aplicará el efecto
+    [SerializeField] private List<GameObject> gameObjectsToPulse = new List<GameObject>();
+
     private void Awake()
     {
       if (Instance == null)
@@ -20,19 +25,23 @@ namespace Script.Animation
         Debug.LogError("Multiple instances of ScorePulse!");
       }
     }
-    
+
     public void Pulse()
     {
       if (!isPulsing)
       {
-        StartCoroutine(PulseEffect());
+        // Aplica el efecto a todos los GameObjects en la lista
+        foreach (var gameObject in gameObjectsToPulse)
+        {
+          StartCoroutine(PulseEffect(gameObject));
+        }
       }
     }
 
-    private IEnumerator PulseEffect()
+    private IEnumerator PulseEffect(GameObject gameObjectToPulse)
     {
       isPulsing = true;
-      Vector3 originalScale = transform.localScale;
+      Vector3 originalScale = gameObjectToPulse.transform.localScale;
       Vector3 destinationScale = new Vector3(maxScale, maxScale, maxScale);
 
       // agrandar
@@ -40,7 +49,7 @@ namespace Script.Animation
       while (t <= 1.0f)
       {
         t += Time.deltaTime * pulseSpeed;
-        transform.localScale = Vector3.Lerp(originalScale, destinationScale, t);
+        gameObjectToPulse.transform.localScale = Vector3.Lerp(originalScale, destinationScale, t);
         yield return null;
       }
 
@@ -49,11 +58,11 @@ namespace Script.Animation
       while (t <= 1.0f)
       {
         t += Time.deltaTime * pulseSpeed;
-        transform.localScale = Vector3.Lerp(destinationScale, originalScale, t);
+        gameObjectToPulse.transform.localScale = Vector3.Lerp(destinationScale, originalScale, t);
         yield return null;
       }
 
-      transform.localScale = originalScale;
+      gameObjectToPulse.transform.localScale = originalScale;
       isPulsing = false;
     }
   }
