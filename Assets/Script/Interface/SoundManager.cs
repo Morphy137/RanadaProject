@@ -126,6 +126,8 @@ namespace Script.Interface
     void Update()
     {
         if (hasGameStarted && !bgmSource.isPlaying) {
+            // Guarda el puntaje antes de cambiar de escena
+            GlobalScore.SaveValues();
             SceneManager.LoadScene("ScoreScreen");
         }
     }

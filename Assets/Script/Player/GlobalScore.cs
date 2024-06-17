@@ -2,25 +2,23 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GlobalScore : MonoBehaviour
 {
-    public static int score;
-    public static int totalCombo;
-    public static int currentCombo;
-    public static int highestCombo;
-    public static int missesHit;
-    public static int perfectHits;
-    public static int greatHits;
-    public static int gooodHits;
-    public static int totalNotes;
-}
+    public static int score;        // El puntaje
+    public static int totalCombo;   // El total de combos
+    public static int currentCombo; // El combo actual
+    public static int highestCombo; // El combo más alto
+    public static int missesHit;    // Pucha
+    public static int perfectHits;  // Uyuuuy
+    public static int greatHits;    // Bakan
+    public static int gooodHits;    // Wena
+    public static int totalNotes;   // Notas totales
 
-
-
-public class ScoreDisplay : MonoBehaviour
-{
-    public Text scoreText;
-
-    void Update()
+        // Método para guardar el puntaje
+    public static void SaveValues()
     {
-        scoreText.text = "Score: " + GlobalScore.score.ToString();
+        PlayerPrefs.SetInt("Score", score);
+        PlayerPrefs.SetInt("PerfectHits", perfectHits);
+        PlayerPrefs.SetInt("GreatHits", greatHits);
+        PlayerPrefs.SetInt("GooodHits", gooodHits);
+        PlayerPrefs.SetInt("MissesHit", missesHit);
     }
 }
