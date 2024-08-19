@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 83313353}
   - component: {fileID: 83313352}
   - component: {fileID: 83313354}
+  - component: {fileID: 83313355}
   m_Layer: 5
   m_Name: Text Perfect(TMP)
   m_TagString: Untagged
@@ -515,12 +516,28 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 83313350}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 791ef6ae0f9852342be0291d44dbdbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1203448198}
+  perfectHitsText: {fileID: 83313352}
+  greatHitsText: {fileID: 521715}
+  gooodHitsText: {fileID: 1307561689}
+  missesHitText: {fileID: 1951855714}
+--- !u!114 &83313355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83313350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6482b6427c489944aa5077ca20d21f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   perfectHitsText: {fileID: 83313352}
   greatHitsText: {fileID: 521715}
   gooodHitsText: {fileID: 1307561689}
