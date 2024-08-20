@@ -1,4 +1,5 @@
-﻿using Melanchall.DryWetMidi.Core;
+﻿using System;
+using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using Script.Interface;
 using UnityEngine;
@@ -70,6 +71,14 @@ namespace Script.Notes
     public void StartSong()
     {
       soundManagerAudioSource.Play();
+    }
+
+    public void Update()
+    {
+      if(soundManagerAudioSource.isPlaying)
+      {
+        SceneLoader.Instance.LoadSceneInBackground("ScoreScreen");
+      }
     }
 
     public static double GetAudioSourceTime()

@@ -22,7 +22,9 @@ namespace Script.Interface
         Instance = this;
       }
     }
-
+    
+    
+    // NO CARGA LA PANTALLA DE CARGA (QUIZAS), REVISAR ERROR
     public void ShowLoadingScreen()
     {
       // Muestra la pantalla de carga
