@@ -22,7 +22,9 @@ namespace Script.Interface
     [SerializeField] private TextMeshProUGUI countdownText;
     [SerializeField] private float resumeDelay = 3f;
     
-    private bool _isPaused;
+    private static bool _isPaused;
+
+    public static bool IsPaused => _isPaused;
 
     private void Start()
     {

@@ -50,7 +50,7 @@ namespace Script.Interface
         audioSource = gameObject.AddComponent<AudioSource>();
       }
 
-      // Asignamos la musica predefinida
+      // Asignamos la música predefinida
       menuSource.clip = pauseMUSIC;
       audioSource.clip = clickSOUND;
       

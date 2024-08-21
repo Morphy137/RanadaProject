@@ -75,7 +75,8 @@ namespace Script.Notes
     public void StartSong()
     {
       soundManagerAudioSource.Play();
-      StartCoroutine(TimeAfterChangeScene(SoundManager.Instance.GetLengthGameAudioClip() + 2f));
+
+      StartCoroutine(TimeAfterChangeScene());
     }
 
     public void ChangeScene()
@@ -89,10 +90,17 @@ namespace Script.Notes
       return (double)Instance.soundManagerAudioSource.timeSamples / Instance.soundManagerAudioSource.clip.frequency;
     }
 
-    private IEnumerator TimeAfterChangeScene(double timeSong)
+    private IEnumerator TimeAfterChangeScene()
     {
-      Debug.Log("Entrando en TimeAfterChangeScene");
-      yield return new WaitForSeconds((float)timeSong);
+
+      while (soundManagerAudioSource.isPlaying != MenuPause.IsPaused)
+      {
+        yield return null;
+      }
+
+      Debug.Log("Audio ha terminado de reproducirse");
+
+      yield return new WaitForSeconds(1f);
       ChangeScene();
     }
   }
