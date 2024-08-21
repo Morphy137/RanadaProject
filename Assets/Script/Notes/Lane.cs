@@ -142,10 +142,6 @@ namespace Script.Notes
       HandleNoteInput(false);
     }
     
-    /*
-     * Handle the hit event when the note is hit
-     * @param position: The position of the note
-     */
     private void Hit(float position)
     {
       ScoreManager.Hit();
@@ -178,10 +174,7 @@ namespace Script.Notes
 
       StartCoroutine(DestroyAfterDelay(prefab, 3f));
     }
-
-    /*
-     * Handle the miss event when the note is missed
-     */
+    
     private void Miss(bool isInputMiss)
     {
       ScoreManager.Miss(isInputMiss);

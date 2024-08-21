@@ -1,4 +1,5 @@
-﻿using Script.Animation;
+﻿using System;
+using Script.Animation;
 using UnityEngine;
 
 namespace Script.Player
@@ -12,9 +13,20 @@ namespace Script.Player
     public TMPro.TextMeshProUGUI scoreText; // TextMeshPro component for displaying the score
     public GameObject playerPrefab;
 
+    private void Awake()
+    {
+      if (Instance == null)
+      {
+        Instance = this;
+      }
+      else
+      {
+        Destroy(gameObject);
+      }
+    }
+
     private void Start()
     {
-      Instance = this;
       GlobalScore.score = 0;
       GlobalScore.totalCombo = 0;
       GlobalScore.currentCombo = 0;

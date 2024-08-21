@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -52,7 +50,7 @@ namespace Script.Interface
         audioSource = gameObject.AddComponent<AudioSource>();
       }
 
-      // Asignamos la musica predefinida
+      // Asignamos la música predefinida
       menuSource.clip = pauseMUSIC;
       audioSource.clip = clickSOUND;
       
@@ -140,6 +138,11 @@ namespace Script.Interface
         bgmSource.Stop();
         bgmSource.Play();
       }
+    }
+
+    public float GetLengthGameAudioClip()
+    {
+      return gameMUSIC.length;
     }
     
     public IEnumerator AdjustVolumeOverTime(AudioSource audioSource, float volumeChangeSpeed, float targetVolume)
