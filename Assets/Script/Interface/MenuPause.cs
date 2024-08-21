@@ -1,4 +1,4 @@
-﻿using System;
+﻿
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
@@ -125,7 +125,5 @@ namespace Script.Interface
       // Carga el menú principal
       SceneManager.LoadScene("MenuPrincipal");
     }
-    
-    
   }
 }

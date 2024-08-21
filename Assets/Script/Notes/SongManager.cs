@@ -1,8 +1,10 @@
-﻿using System;
+﻿
+using System.Collections;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using Script.Interface;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Script.Notes
 {
@@ -15,6 +17,8 @@ namespace Script.Notes
     [SerializeField] private Lane[] lanes;
     public float songDelayInSeconds;
     public double marginOfError; // in seconds
+
+
     
     // Ruta de los archivos MIDI
     private const string DirectoryFile = "/StreamingAssets/MIDI_Files/";
@@ -71,19 +75,25 @@ namespace Script.Notes
     public void StartSong()
     {
       soundManagerAudioSource.Play();
+      StartCoroutine(TimeAfterChangeScene(SoundManager.Instance.GetLengthGameAudioClip() + 2f));
     }
 
-    public void Update()
+    public void ChangeScene()
     {
-      if(soundManagerAudioSource.isPlaying)
-      {
-        SceneLoader.Instance.LoadSceneInBackground("ScoreScreen");
-      }
+      Debug.Log("Entrando en ChangeScene");
+      SceneManager.LoadScene("ScoreScreen");
     }
 
     public static double GetAudioSourceTime()
     {
       return (double)Instance.soundManagerAudioSource.timeSamples / Instance.soundManagerAudioSource.clip.frequency;
+    }
+
+    private IEnumerator TimeAfterChangeScene(double timeSong)
+    {
+      Debug.Log("Entrando en TimeAfterChangeScene");
+      yield return new WaitForSeconds((float)timeSong);
+      ChangeScene();
     }
   }
 }

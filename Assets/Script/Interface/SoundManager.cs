@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEditor;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -140,6 +138,11 @@ namespace Script.Interface
         bgmSource.Stop();
         bgmSource.Play();
       }
+    }
+
+    public float GetLengthGameAudioClip()
+    {
+      return gameMUSIC.length;
     }
     
     public IEnumerator AdjustVolumeOverTime(AudioSource audioSource, float volumeChangeSpeed, float targetVolume)

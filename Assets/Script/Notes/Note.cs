@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Script.Notes
 {
@@ -8,10 +9,10 @@ namespace Script.Notes
         double timeInstantiated;
         public float assignedTime;
         public bool movementEnabled = true;
-        public GameObject placeholder; // PlaceHolder movement
+        // public GameObject placeholder; // PlaceHolder movement
         private bool isMoving = false;
-        private Vector3 targetPosition = new Vector3(-10.87f, -2.17f, 0f); // Coordenadas exactas
-        private Vector3 targetScale = new Vector3(0.50f, 0.50f, 0.50f); // Escala objetivo
+        private Vector3 targetPosition = new(-10.87f, -2.17f, 0f); // Coordenadas exactas
+        private Vector3 targetScale = new(0.50f, 0.50f, 0.50f); // Escala objetivo
 
         void Start()
         {
