@@ -25,6 +25,7 @@ namespace Script.Interface
     [Header("Efectos de sonido")]
     [SerializeField] private AudioClip clickSOUND; // sonido de click jijija
     [SerializeField] private AudioClip voiceSOUND; // proximamente supongo
+    [SerializeField] private AudioClip hoverSOUND;
     
     [Header("Variables de Valor")]
     private float bgmVolume;
@@ -129,6 +130,11 @@ namespace Script.Interface
     public void PlayClickSound()
     {
       sfxSource.PlayOneShot(clickSOUND);
+    }
+
+    public void PlayHoverSound()
+    {
+      sfxSource.PlayOneShot(hoverSOUND);
     }
     
     public void ResetAudioSource()
