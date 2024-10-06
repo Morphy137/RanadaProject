@@ -13,6 +13,7 @@ namespace Script.Notes
     public static SongManager Instance;
     // obtenemos el audiosourceBGM del SoundManager
     private AudioSource soundManagerAudioSource;
+    private AudioSource menuSource;
     
     [SerializeField] private Lane[] lanes;
     public float songDelayInSeconds;
@@ -41,6 +42,11 @@ namespace Script.Notes
       {
         // definimos que queremos usar el audiosource de la música de fondo
         soundManagerAudioSource = SoundManager.Instance.GetBgmSource();
+        soundManagerAudioSource.Pause(); // Pausa la música de fondo
+        menuSource = SoundManager.Instance.GetMenuSource();
+        menuSource.Play();
+        StartCoroutine(SoundManager.Instance.AdjustVolumeOverTime(menuSource, 0.1f, 0.5f));      
+        GlobalScore.songStarted = false;
       }
       else
       {
@@ -69,12 +75,19 @@ namespace Script.Notes
       foreach (var lane in lanes) lane.SetTimeStamps(array);
 
       GlobalScore.totalNotes = notes.Count;
+      //Invoke(nameof(StartSong), songDelayInSeconds);
+    }
+
+    public void InitSong()
+    {
       Invoke(nameof(StartSong), songDelayInSeconds);
     }
 
     public void StartSong()
     {
       soundManagerAudioSource.Play();
+      menuSource.Stop();
+      GlobalScore.songStarted = true;
 
       StartCoroutine(TimeAfterChangeScene());
     }

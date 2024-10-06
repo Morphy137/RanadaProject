@@ -11,4 +11,5 @@ public class GlobalScore : MonoBehaviour
     public static int greatHits;
     public static int gooodHits;
     public static int totalNotes;
+    public static bool songStarted;
 }

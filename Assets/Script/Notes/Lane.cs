@@ -87,6 +87,8 @@ namespace Script.Notes
 
     private void HandleNoteInput(bool inputPressed)
     {
+      if (!GlobalScore.songStarted)
+        return;
       if (inputIndex < timeStamps.Count)
       {
         double timeStamp = timeStamps[inputIndex];
