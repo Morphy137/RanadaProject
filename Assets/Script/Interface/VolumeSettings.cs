@@ -1,33 +1,46 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Script.Interface;
+using TMPro;
 
 namespace Script.Interface
 {
+    /// <summary>
+    /// Controla la configuración de volumen del juego mediante sliders de UI.
+    /// Sincroniza los valores con SoundManager y PlayerPrefs para persistencia.
+    /// </summary>
     public class VolumeSettings : MonoBehaviour
     {
+        #region Serialized Fields
         [Header("Sliders de Volumen")]
         [SerializeField] private Slider bgmSlider;
         [SerializeField] private Slider sfxSlider;
 
-        [Header("Textos de Valores (Opcional)")]
-        [SerializeField] private TMPro.TextMeshProUGUI bgmValueText;
-        [SerializeField] private TMPro.TextMeshProUGUI sfxValueText;
+        [Header("Textos de Valores")]
+        [SerializeField] private TextMeshProUGUI bgmValueText;
+        [SerializeField] private TextMeshProUGUI sfxValueText;
+        #endregion
 
+        #region Unity Lifecycle
+        /// <summary>
+        /// Inicializa los sliders con los valores guardados de volumen.
+        /// </summary>
         private void Start()
         {
             InitializeSliders();
         }
+        #endregion
 
+        #region Private Methods
+        /// <summary>
+        /// Configura los sliders con los valores actuales de volumen y establece los listeners.
+        /// </summary>
         private void InitializeSliders()
         {
-            // Obtener valores actuales del SoundManager
             if (SoundManager.Instance != null)
             {
                 float bgmVolume = PlayerPrefs.GetFloat("BGM", 0.8f);
                 float sfxVolume = PlayerPrefs.GetFloat("SFX", 0.8f);
 
-                // Configurar sliders si están asignados
                 if (bgmSlider != null)
                 {
                     bgmSlider.value = bgmVolume;
@@ -48,6 +61,10 @@ namespace Script.Interface
             }
         }
 
+        /// <summary>
+        /// Callback cuando el slider de BGM cambia de valor.
+        /// </summary>
+        /// <param name="value">Nuevo valor del volumen</param>
         private void OnBGMVolumeChanged(float value)
         {
             if (SoundManager.Instance != null)
@@ -57,6 +74,10 @@ namespace Script.Interface
             }
         }
 
+        /// <summary>
+        /// Callback cuando el slider de SFX cambia de valor.
+        /// </summary>
+        /// <param name="value">Nuevo valor del volumen</param>
         private void OnSFXVolumeChanged(float value)
         {
             if (SoundManager.Instance != null)
@@ -66,6 +87,10 @@ namespace Script.Interface
             }
         }
 
+        /// <summary>
+        /// Actualiza el texto que muestra el porcentaje de volumen BGM.
+        /// </summary>
+        /// <param name="value">Valor del volumen (0-1)</param>
         private void UpdateBGMText(float value)
         {
             if (bgmValueText != null)
@@ -74,6 +99,10 @@ namespace Script.Interface
             }
         }
 
+        /// <summary>
+        /// Actualiza el texto que muestra el porcentaje de volumen SFX.
+        /// </summary>
+        /// <param name="value">Valor del volumen (0-1)</param>
         private void UpdateSFXText(float value)
         {
             if (sfxValueText != null)
@@ -82,17 +111,24 @@ namespace Script.Interface
             }
         }
 
+        /// <summary>
+        /// Limpia los listeners de los sliders al destruir el objeto.
+        /// </summary>
         private void OnDestroy()
         {
-            // Cleanup listeners
             if (bgmSlider != null)
                 bgmSlider.onValueChanged.RemoveListener(OnBGMVolumeChanged);
 
             if (sfxSlider != null)
                 sfxSlider.onValueChanged.RemoveListener(OnSFXVolumeChanged);
         }
+        #endregion
 
-        // Método público para refrescar los valores desde otros scripts
+        #region Public Methods
+        /// <summary>
+        /// Refresca los valores de los sliders desde las preferencias guardadas.
+        /// Útil para sincronizar cuando se abren paneles de configuración.
+        /// </summary>
         public void RefreshValues()
         {
             if (SoundManager.Instance != null)
@@ -113,5 +149,6 @@ namespace Script.Interface
                 }
             }
         }
+        #endregion
     }
 }
