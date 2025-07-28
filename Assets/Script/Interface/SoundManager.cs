@@ -67,64 +67,219 @@ namespace Script.Interface
 
     private void Start()
     {
-      // Valores iniciales de los sliders
+      // Cargar y aplicar valores guardados
+      LoadVolumeSettings();
+
+      // Conectar sliders si existen en la escena actual
+      ConnectSliders();
+    }
+
+    private void LoadVolumeSettings()
+    {
+      // Cargar valores guardados
       bgmVolume = PlayerPrefs.GetFloat("BGM", 0.8f);
       sfxVolume = PlayerPrefs.GetFloat("SFX", 0.8f);
 
-      bgmSlider.value = bgmVolume;
-      sfxSlider.value = sfxVolume;
+      // Aplicar volúmenes a los AudioSources
+      if (bgmSource != null) bgmSource.volume = bgmVolume;
+      if (sfxSource != null) sfxSource.volume = sfxVolume;
+      if (menuSource != null) menuSource.volume = bgmVolume;
+      if (audioSource != null) audioSource.volume = sfxVolume;
+    }
 
-      bgmSource.volume = bgmVolume;
-      sfxSource.volume = sfxVolume;
+    private void ConnectSliders()
+    {
+      // Resetear referencias de sliders al cambiar de escena
+      bgmSlider = null;
+      sfxSlider = null;
+
+      // Buscar sliders en toda la jerarquía, incluyendo objetos inactivos
+      bgmSlider = FindSliderInHierarchy("SliderBGM");
+      sfxSlider = FindSliderInHierarchy("SliderSFX");
+
+      // También buscar por nombres alternativos comunes
+      if (bgmSlider == null)
+      {
+        bgmSlider = FindSliderInHierarchy("MusicSlider") ?? FindSliderInHierarchy("BGM");
+      }
+
+      if (sfxSlider == null)
+      {
+        sfxSlider = FindSliderInHierarchy("SoundSlider") ?? FindSliderInHierarchy("SFX");
+      }
+
+      // Actualizar valores de sliders si existen
+      if (bgmSlider != null)
+      {
+        bgmSlider.value = bgmVolume;
+        bgmSlider.onValueChanged.RemoveAllListeners();
+        bgmSlider.onValueChanged.AddListener(ChangeBGMVolume);
+        Debug.Log("BGM Slider conectado correctamente");
+      }
+      else
+      {
+        Debug.LogWarning("BGM Slider no encontrado en la escena");
+      }
+
+      if (sfxSlider != null)
+      {
+        sfxSlider.value = sfxVolume;
+        sfxSlider.onValueChanged.RemoveAllListeners();
+        sfxSlider.onValueChanged.AddListener(ChangeSFXVolume);
+        Debug.Log("SFX Slider conectado correctamente");
+      }
+      else
+      {
+        Debug.LogWarning("SFX Slider no encontrado en la escena");
+      }
+    }
+
+    private Slider FindSliderInHierarchy(string sliderName)
+    {
+      // Buscar en todos los objetos, incluyendo inactivos
+      GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+      foreach (GameObject obj in allObjects)
+      {
+        // Solo buscar en objetos de la escena actual (no assets o prefabs)
+        if (obj.scene.isLoaded && obj.name.Contains(sliderName))
+        {
+          Slider slider = obj.GetComponent<Slider>();
+          if (slider != null)
+          {
+            Debug.Log($"Slider encontrado: {obj.name} en {GetGameObjectPath(obj)}");
+            return slider;
+          }
+        }
+      }
+
+      // Búsqueda alternativa usando FindObjectsByType (Unity 6)
+      Slider[] allSliders = FindObjectsByType<Slider>(FindObjectsSortMode.None);
+      foreach (Slider slider in allSliders)
+      {
+        if (slider.gameObject.name.Contains(sliderName))
+        {
+          Debug.Log($"Slider encontrado (método alternativo): {slider.gameObject.name}");
+          return slider;
+        }
+      }
+
+      return null;
+    }
+
+    private string GetGameObjectPath(GameObject obj)
+    {
+      string path = obj.name;
+      Transform parent = obj.transform.parent;
+
+      while (parent != null)
+      {
+        path = parent.name + "/" + path;
+        parent = parent.parent;
+      }
+
+      return path;
     }
 
     public void ChangeBGMVolume(float value)
     {
-      // Cambia el volumen de la música de fondo
+      // Actualizar variable local
+      bgmVolume = value;
+
+      // Aplicar a todos los AudioSources de música
+      if (bgmSource != null) bgmSource.volume = value;
+      if (menuSource != null) menuSource.volume = value;
+
+      // Guardar en PlayerPrefs
       PlayerPrefs.SetFloat("BGM", value);
-      bgmSource.volume = value;
       PlayerPrefs.Save();
+
+      Debug.Log($"BGM Volume changed to: {value}");
     }
 
     public void ChangeSFXVolume(float value)
     {
-      // Volumen de los efectos de sonido
+      // Actualizar variable local
+      sfxVolume = value;
+
+      // Aplicar a todos los AudioSources de efectos
+      if (sfxSource != null) sfxSource.volume = value;
+      if (audioSource != null) audioSource.volume = value;
+
+      // Guardar en PlayerPrefs
       PlayerPrefs.SetFloat("SFX", value);
-      sfxSource.volume = value;
       PlayerPrefs.Save();
+
+      Debug.Log($"SFX Volume changed to: {value}");
     }
 
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+      // Cargar configuración de volumen en cada escena
+      LoadVolumeSettings();
+
+      // Reconectar sliders en la nueva escena
+      StartCoroutine(ConnectSlidersDelayed());
+
       // Cambia la música de fondo dependiendo de la escena
       switch (scene.name)
       {
         case "MenuPrincipal":
-          bgmSource.clip = menuMUSIC;
-          bgmSource.loop = true;
-          bgmSource.Play();
+          if (bgmSource != null)
+          {
+            bgmSource.clip = menuMUSIC;
+            bgmSource.loop = true;
+            bgmSource.volume = bgmVolume; // Aplicar volumen guardado
+            bgmSource.Play();
+          }
           break;
         case "Game":
-          bgmSource.clip = gameMUSIC;
-          bgmSource.loop = false;
-          bgmSource.Play();
+          if (bgmSource != null)
+          {
+            bgmSource.clip = gameMUSIC;
+            bgmSource.loop = false;
+            bgmSource.volume = bgmVolume; // Aplicar volumen guardado
+            bgmSource.Play();
+          }
           break;
         case "Credits":
-          bgmSource.clip = menuMUSIC;
-          bgmSource.loop = true;
-          bgmSource.Play();
+          if (bgmSource != null)
+          {
+            bgmSource.clip = menuMUSIC;
+            bgmSource.loop = true;
+            bgmSource.volume = bgmVolume; // Aplicar volumen guardado
+            bgmSource.Play();
+          }
           break;
         case "ScoreScreen":
-          bgmSource.clip = menuMUSIC;
-          bgmSource.loop = true;
-          bgmSource.Play();
+          if (bgmSource != null)
+          {
+            bgmSource.clip = menuMUSIC;
+            bgmSource.loop = true;
+            bgmSource.volume = bgmVolume; // Aplicar volumen guardado
+            bgmSource.Play();
+          }
           break;
         default:
           Debug.Log("No se ha asignado música a la escena");
           break;
       }
+    }
 
+    private IEnumerator ConnectSlidersDelayed()
+    {
+      // Esperar más tiempo para que Manager1 y otros objetos se inicialicen
+      yield return new WaitForSeconds(0.1f);
+      ConnectSliders();
+
+      // Si no se encontraron sliders, intentar de nuevo después de un delay adicional
+      if (!AreSlidersConnected())
+      {
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log("Reintentando conexión de sliders...");
+        ConnectSliders();
+      }
     }
 
     public void PlayPauseMusic()
@@ -170,6 +325,36 @@ namespace Script.Interface
 
       // Asegúrate de que el volumen llegue a targetVolume
       audioSource.volume = targetVolume;
+    }
+
+    // Método público para reconectar sliders desde otros scripts
+    public void RefreshSliders()
+    {
+      ConnectSliders();
+    }
+
+    // Método específico para cuando Manager1 se inicializa
+    public void OnManagerInitialized()
+    {
+      StartCoroutine(ConnectSlidersDelayed());
+    }
+
+    // Método para verificar si los sliders están conectados
+    public bool AreSlidersConnected()
+    {
+      return bgmSlider != null && sfxSlider != null;
+    }
+
+    private void OnDestroy()
+    {
+      // Cleanup para evitar memory leaks
+      SceneManager.sceneLoaded -= OnSceneLoaded;
+
+      if (bgmSlider != null)
+        bgmSlider.onValueChanged.RemoveAllListeners();
+
+      if (sfxSlider != null)
+        sfxSlider.onValueChanged.RemoveAllListeners();
     }
   }
 }
