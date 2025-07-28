@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 0
@@ -325,15 +321,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -371,7 +369,7 @@ GameObject:
   - component: {fileID: 68468668}
   - component: {fileID: 68468667}
   m_Layer: 5
-  m_Name: Dog
+  m_Name: Mascota
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -393,8 +391,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 752, y: -246}
-  m_SizeDelta: {x: 674.3326, y: 674.3326}
+  m_AnchoredPosition: {x: 687.842, y: -267.732}
+  m_SizeDelta: {x: 544.3087, y: 544.3087}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &68468667
 MonoBehaviour:
@@ -899,6 +897,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -986,6 +987,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1036,7 +1040,7 @@ MonoBehaviour:
   rotationSpeed: 100
 --- !u!95 &440392385
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1050,6 +1054,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1188,15 +1193,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 00000000
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -1666,6 +1673,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1900,6 +1910,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1981,7 +1994,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 913d72c92debb4d719c3e9bac7ba6709, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 913d72c92debb4d719c3e9bac7ba6709, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -2326,7 +2340,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &833735670
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2340,6 +2354,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -2362,6 +2377,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2632,15 +2650,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -2678,7 +2698,7 @@ GameObject:
   - component: {fileID: 987983372}
   - component: {fileID: 987983371}
   m_Layer: 5
-  m_Name: Image
+  m_Name: TutorialBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2695,7 +2715,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1374309104}
   m_Father: {fileID: 1369205231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2775,6 +2796,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3255,8 +3279,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38.32312, y: -92}
-  m_SizeDelta: {x: 1472.1033, y: 90.2859}
+  m_AnchoredPosition: {x: -30.032806, y: -92}
+  m_SizeDelta: {x: 304.3611, y: 90.2859}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1161414338
 MonoBehaviour:
@@ -3278,10 +3302,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <-- Tecla "D"
+  m_text: Tecla "D"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
-  m_sharedMaterial: {fileID: -6204032033226617577, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
+  m_sharedMaterial: {fileID: 6252507486267969914, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3300,18 +3324,18 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 93368250
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.3
-  m_fontSizeBase: 42.3
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -3321,15 +3345,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -3341,7 +3367,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -2.3685913, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3591,7 +3617,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1210576488
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3990,6 +4016,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4123,7 +4152,6 @@ RectTransform:
   - {fileID: 1966049729}
   - {fileID: 1161414337}
   - {fileID: 1690476968}
-  - {fileID: 1374309104}
   m_Father: {fileID: 622613062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4188,7 +4216,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -4219,17 +4247,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374309103}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1369205231}
+  m_Father: {fileID: 987983370}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0050049, y: 254}
-  m_SizeDelta: {x: 1364.7827, y: 385.4174}
+  m_AnchoredPosition: {x: 5.6793, y: -46.64789}
+  m_SizeDelta: {x: 916.6415, y: 191.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1374309105
 MonoBehaviour:
@@ -4251,10 +4279,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Como Jugar
+  m_text: Tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
-  m_sharedMaterial: {fileID: -6204032033226617577, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5f16736c3e0c91a44bf176818b175403, type: 2}
+  m_sharedMaterial: {fileID: 935222445355579240, guid: 5f16736c3e0c91a44bf176818b175403, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4278,13 +4306,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 102.4
-  m_fontSizeBase: 102.4
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -4294,15 +4322,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -4377,6 +4407,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5102,8 +5135,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -38.32312, y: -234}
-  m_SizeDelta: {x: 1472.1033, y: 90.2859}
+  m_AnchoredPosition: {x: -30.033, y: -234}
+  m_SizeDelta: {x: 304.36, y: 90.2859}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1690476969
 MonoBehaviour:
@@ -5125,10 +5158,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <-- Tecla "J"
+  m_text: Tecla "J"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
-  m_sharedMaterial: {fileID: -6204032033226617577, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
+  m_sharedMaterial: {fileID: 6252507486267969914, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5147,18 +5180,18 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
+  m_TextStyleHashCode: 93368250
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.3
-  m_fontSizeBase: 42.3
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -5168,15 +5201,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -5502,7 +5537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!95 &1848800354
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5516,6 +5551,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -5789,6 +5825,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5839,7 +5878,7 @@ MonoBehaviour:
   rotationSpeed: 100
 --- !u!95 &1941072865
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5853,6 +5892,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -5915,11 +5955,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Presiona la tecla justo cuando los circulos de colores se alineen con el
-    marcador para seguir el ritmo!
+  m_text: Presiona la tecla cuando los circulos de colores se ajusten con el marcador
+    para aumentar la puntuacion!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
-  m_sharedMaterial: {fileID: -6204032033226617577, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
+  m_sharedMaterial: {fileID: 6252507486267969914, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5943,13 +5983,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.31
-  m_fontSizeBase: 51.31
+  m_fontSize: 64
+  m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -5959,15 +5999,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -6166,8 +6208,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0050201, y: -634}
-  m_SizeDelta: {x: 1920, y: 360.2641}
+  m_AnchoredPosition: {x: 0.0050201, y: -496.88}
+  m_SizeDelta: {x: 1920, y: 86.022}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2091354465
 MonoBehaviour:
@@ -6191,8 +6233,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: -- Presiona cualquier tecla para Continuar --
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
-  m_sharedMaterial: {fileID: -6204032033226617577, guid: 71058a3e5cbb57d4caa5071bbd05cef7, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
+  m_sharedMaterial: {fileID: 6252507486267969914, guid: b77c3bea072678f4ba889cd910bd5e64, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6216,13 +6258,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.9
-  m_fontSizeBase: 31.9
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 3
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -6232,15 +6274,17 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 1
+  m_ActiveFontFeatures: 6e72656b
   m_enableExtraPadding: 0
   checkPaddingRequired: 0
   m_isRichText: 1
+  m_EmojiFallbackSupport: 1
   m_parseCtrlCharacters: 1
   m_isOrthographic: 1
   m_isCullingEnabled: 0
@@ -6357,6 +6401,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &2119174884
 GameObject:
   m_ObjectHideFlags: 0
@@ -6607,47 +6652,47 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[0]
+      propertyPath: 'foodPrefabs.Array.data[0]'
       value: 
       objectReference: {fileID: 6626860275570726447, guid: 4bd3930dc248de6429fb9889a6ed331c, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[1]
+      propertyPath: 'foodPrefabs.Array.data[1]'
       value: 
       objectReference: {fileID: 5858040880530078911, guid: ea92242c5d1e3574dba55bd35248cb80, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[2]
+      propertyPath: 'foodPrefabs.Array.data[2]'
       value: 
       objectReference: {fileID: 8684178338783028360, guid: 213c72765446a8841b32214460819542, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[3]
+      propertyPath: 'foodPrefabs.Array.data[3]'
       value: 
       objectReference: {fileID: 3797424514047760109, guid: 63ea07d46446ae84ab944ddc6dcfdd6a, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[4]
+      propertyPath: 'foodPrefabs.Array.data[4]'
       value: 
       objectReference: {fileID: 2587054638828135497, guid: 13c883f2fb6e11a4a9936f567ec80986, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[5]
+      propertyPath: 'foodPrefabs.Array.data[5]'
       value: 
       objectReference: {fileID: 8182361824474613760, guid: 85e34a43d594eb442a7e5cd2025f00a6, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[6]
+      propertyPath: 'foodPrefabs.Array.data[6]'
       value: 
       objectReference: {fileID: 7375896806810228918, guid: b825fcaea118c9a4fbf41382f7d5c769, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[7]
+      propertyPath: 'foodPrefabs.Array.data[7]'
       value: 
       objectReference: {fileID: 5738730658567744744, guid: 274117581949ab94cab93c8f37695e71, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: foodPrefabs.Array.data[8]
+      propertyPath: 'foodPrefabs.Array.data[8]'
       value: 
       objectReference: {fileID: 1223316726721237522, guid: a8f4e2cac7745fe43bfa8e992a1a65bc, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: spriteOptions.Array.data[0]
+      propertyPath: 'spriteOptions.Array.data[0]'
       value: 
       objectReference: {fileID: 21300000, guid: 292a401c22b5f1d4f8b17b1afc5e22d9, type: 3}
     - target: {fileID: 419121949214208663, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
-      propertyPath: spriteOptions.Array.data[1]
+      propertyPath: 'spriteOptions.Array.data[1]'
       value: 
       objectReference: {fileID: 21300000, guid: e09c00a81bd01ae49944dbbb21ccfa7c, type: 3}
     - target: {fileID: 1645255493166857312, guid: a5a879430504bcb4b9f7881e79723606, type: 3}
@@ -7058,11 +7103,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 10900000, guid: c334973cef89a9840b0b0c507e0377ab, type: 3}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
-      propertyPath: lanes.Array.data[0]
+      propertyPath: 'lanes.Array.data[0]'
       value: 
       objectReference: {fileID: 460683200}
     - target: {fileID: 4178581833984568051, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
-      propertyPath: lanes.Array.data[1]
+      propertyPath: 'lanes.Array.data[1]'
       value: 
       objectReference: {fileID: 1281302599}
     - target: {fileID: 6962847948981781577, guid: 812eba6dc4d53a34bac2d1a71fc794e1, type: 3}
@@ -7248,47 +7293,47 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[0]
+      propertyPath: 'foodPrefabs.Array.data[0]'
       value: 
       objectReference: {fileID: 6626860275570726447, guid: 4bd3930dc248de6429fb9889a6ed331c, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[1]
+      propertyPath: 'foodPrefabs.Array.data[1]'
       value: 
       objectReference: {fileID: 5858040880530078911, guid: ea92242c5d1e3574dba55bd35248cb80, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[2]
+      propertyPath: 'foodPrefabs.Array.data[2]'
       value: 
       objectReference: {fileID: 8684178338783028360, guid: 213c72765446a8841b32214460819542, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[3]
+      propertyPath: 'foodPrefabs.Array.data[3]'
       value: 
       objectReference: {fileID: 3797424514047760109, guid: 63ea07d46446ae84ab944ddc6dcfdd6a, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[4]
+      propertyPath: 'foodPrefabs.Array.data[4]'
       value: 
       objectReference: {fileID: 2587054638828135497, guid: 13c883f2fb6e11a4a9936f567ec80986, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[5]
+      propertyPath: 'foodPrefabs.Array.data[5]'
       value: 
       objectReference: {fileID: 8182361824474613760, guid: 85e34a43d594eb442a7e5cd2025f00a6, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[6]
+      propertyPath: 'foodPrefabs.Array.data[6]'
       value: 
       objectReference: {fileID: 7375896806810228918, guid: b825fcaea118c9a4fbf41382f7d5c769, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[7]
+      propertyPath: 'foodPrefabs.Array.data[7]'
       value: 
       objectReference: {fileID: 5738730658567744744, guid: 274117581949ab94cab93c8f37695e71, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: foodPrefabs.Array.data[8]
+      propertyPath: 'foodPrefabs.Array.data[8]'
       value: 
       objectReference: {fileID: 1223316726721237522, guid: a8f4e2cac7745fe43bfa8e992a1a65bc, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: spriteOptions.Array.data[0]
+      propertyPath: 'spriteOptions.Array.data[0]'
       value: 
       objectReference: {fileID: 21300000, guid: 292a401c22b5f1d4f8b17b1afc5e22d9, type: 3}
     - target: {fileID: 8258095164810878244, guid: 96baed001de5cbe4db47a73f109946af, type: 3}
-      propertyPath: spriteOptions.Array.data[1]
+      propertyPath: 'spriteOptions.Array.data[1]'
       value: 
       objectReference: {fileID: 21300000, guid: e09c00a81bd01ae49944dbbb21ccfa7c, type: 3}
     m_RemovedComponents: []
