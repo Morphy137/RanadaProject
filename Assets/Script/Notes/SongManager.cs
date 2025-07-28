@@ -3,6 +3,7 @@ using System.Collections;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using Script.Interface;
+using Script.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
