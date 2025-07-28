@@ -10,27 +10,27 @@ namespace Script.Interface
     [Header("Sliders")]
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
-    
+
     [Header("AudioSource")]
     [SerializeField] private AudioSource bgmSource; // AudioSource para la música de fondo
     [SerializeField] private AudioSource sfxSource; // AudioSource para los efectos de sonido
     [SerializeField] private AudioSource menuSource; // AudioSource para el menú
     [SerializeField] private AudioSource audioSource; // extra click sound
-    
+
     [Header("Musica asignables")]
     [SerializeField] private AudioClip menuMUSIC; // Música del menú
     [SerializeField] private AudioClip gameMUSIC; // Música del juego
     [SerializeField] private AudioClip pauseMUSIC; // Música de pausa y loadingScreen
-    
+
     [Header("Efectos de sonido")]
     [SerializeField] private AudioClip clickSOUND; // sonido de click jijija
     [SerializeField] private AudioClip voiceSOUND; // proximamente supongo
     [SerializeField] private AudioClip hoverSOUND;
-    
+
     [Header("Variables de Valor")]
     private float bgmVolume;
     private float sfxVolume;
-    
+
     //Getter
     public static SoundManager Instance { get; private set; }
     public AudioSource GetMenuSource() { return menuSource; }
@@ -40,11 +40,18 @@ namespace Script.Interface
 
     private void Awake()
     {
+      // Improved Singleton pattern for Unity 6
       if (Instance == null)
       {
         Instance = this;
+        DontDestroyOnLoad(gameObject); // Persist across scenes
       }
-      
+      else if (Instance != this)
+      {
+        Destroy(gameObject); // Destroy duplicate instances
+        return;
+      }
+
       audioSource = GetComponent<AudioSource>();
       if (audioSource == null)
       {
@@ -54,16 +61,16 @@ namespace Script.Interface
       // Asignamos la música predefinida
       menuSource.clip = pauseMUSIC;
       audioSource.clip = clickSOUND;
-      
+
       SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    
+
     private void Start()
     {
       // Valores iniciales de los sliders
       bgmVolume = PlayerPrefs.GetFloat("BGM", 0.8f);
       sfxVolume = PlayerPrefs.GetFloat("SFX", 0.8f);
-      
+
       bgmSlider.value = bgmVolume;
       sfxSlider.value = sfxVolume;
 
@@ -86,8 +93,8 @@ namespace Script.Interface
       sfxSource.volume = value;
       PlayerPrefs.Save();
     }
-    
-    
+
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
       // Cambia la música de fondo dependiendo de la escena
@@ -117,7 +124,7 @@ namespace Script.Interface
           Debug.Log("No se ha asignado música a la escena");
           break;
       }
-      
+
     }
 
     public void PlayPauseMusic()
@@ -136,7 +143,7 @@ namespace Script.Interface
     {
       sfxSource.PlayOneShot(hoverSOUND);
     }
-    
+
     public void ResetAudioSource()
     {
       if (bgmSource != null)
@@ -150,7 +157,7 @@ namespace Script.Interface
     {
       return gameMUSIC.length;
     }
-    
+
     public IEnumerator AdjustVolumeOverTime(AudioSource audioSource, float volumeChangeSpeed, float targetVolume)
     {
       // Si volumeChangeSpeed es positivo, aumenta el volumen

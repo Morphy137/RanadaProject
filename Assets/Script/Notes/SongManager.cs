@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using Script.Interface;
@@ -14,20 +13,20 @@ namespace Script.Notes
     // obtenemos el audiosourceBGM del SoundManager
     private AudioSource soundManagerAudioSource;
     private AudioSource menuSource;
-    
+
     [SerializeField] private Lane[] lanes;
     public float songDelayInSeconds;
     public double marginOfError; // in seconds
 
 
-    
+
     // Ruta de los archivos MIDI
     private const string DirectoryFile = "/StreamingAssets/MIDI_Files/";
 
     public int inputDelayInMilliseconds;
-    
+
     [SerializeField] private string fileLocation;
-    
+
     public float noteTime;
     public float noteSpawnY;
     public float noteTapY;
@@ -45,14 +44,14 @@ namespace Script.Notes
         soundManagerAudioSource.Pause(); // Pausa la música de fondo
         menuSource = SoundManager.Instance.GetMenuSource();
         menuSource.Play();
-        StartCoroutine(SoundManager.Instance.AdjustVolumeOverTime(menuSource, 0.1f, 0.5f));      
+        StartCoroutine(SoundManager.Instance.AdjustVolumeOverTime(menuSource, 0.1f, 0.5f));
         GlobalScore.songStarted = false;
       }
       else
       {
         Debug.LogError("SoundManager no se ha inicializado");
       }
-      
+
       if (Instance == null)
       {
         Instance = this;
@@ -62,8 +61,23 @@ namespace Script.Notes
 
     private void ReadFromFile()
     {
-      midiFile = MidiFile.Read(Application.dataPath + DirectoryFile + fileLocation);
-      GetDataFromMidi();
+      try
+      {
+        string fullPath = Application.dataPath + DirectoryFile + fileLocation;
+        if (System.IO.File.Exists(fullPath))
+        {
+          midiFile = MidiFile.Read(fullPath);
+          GetDataFromMidi();
+        }
+        else
+        {
+          Debug.LogError($"MIDI file not found: {fullPath}");
+        }
+      }
+      catch (System.Exception e)
+      {
+        Debug.LogError($"Error reading MIDI file: {e.Message}");
+      }
     }
 
     private void GetDataFromMidi()

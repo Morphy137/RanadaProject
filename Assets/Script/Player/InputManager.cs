@@ -7,35 +7,35 @@ namespace Script.Player
 {
   public class InputManager : MonoBehaviour
   {
-    [Header("Objetos")] 
+    [Header("Objetos")]
     [SerializeField] private Lane lane1;
     [SerializeField] private Lane lane2;
-    
+
     [Header("Componentes")]
     [SerializeField] private MenuPause menuPause;
     [SerializeField] private GameObject[] objects; // Arreglo de hijos
-    
+
     private PlayerInput playerInput;
-    
-    [Header("Sprites para cambiar")] 
+
+    [Header("Sprites para cambiar")]
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite pressedSprite;
-    
+
     private bool lane1KeyPressed;
     private bool lane2KeyPressed;
-    
+
     private SpriteRenderer[] spriteRenderers;
-    
+
     private void Awake()
     {
       playerInput = new PlayerInput();
-      
+
       playerInput.Player.Lane1Key.performed += ctx => lane1.OnInputPressed();
-      
+
       playerInput.Player.Lane2Key.performed += ctx => lane2.OnInputPressed();
-      
+
       playerInput.Player.Pause.canceled += ctx => menuPause.TogglePause();
-      
+
       playerInput.Player.Click.performed += ctx => SoundManager.Instance.PlayClickSound();
     }
 
@@ -53,21 +53,24 @@ namespace Script.Player
       HandleLaneInput(lane1, lane1KeyPressed, 0);
       HandleLaneInput(lane2, lane2KeyPressed, 1);
     }
-    
+
     private void HandleLaneInput(Lane lane, bool keyPressed, int spriteIndex)
     {
-      if (lane != null && spriteRenderers[spriteIndex] != null)
+      // Enhanced null safety for Unity 6
+      if (lane == null || spriteRenderers == null || spriteIndex >= spriteRenderers.Length || spriteRenderers[spriteIndex] == null)
       {
-        if (keyPressed)
-        {
-          spriteRenderers[spriteIndex].sprite = pressedSprite;
-          lane.OnInputPressed(); // Método para manejar la entrada presionada en el script de Lane
-        }
-        else
-        {
-          spriteRenderers[spriteIndex].sprite = defaultSprite;
-          lane.OnInputReleased(); // Método para manejar la entrada liberada en el script de Lane
-        }
+        return; // Early return for safety
+      }
+
+      if (keyPressed)
+      {
+        spriteRenderers[spriteIndex].sprite = pressedSprite;
+        lane.OnInputPressed(); // Método para manejar la entrada presionada en el script de Lane
+      }
+      else
+      {
+        spriteRenderers[spriteIndex].sprite = defaultSprite;
+        lane.OnInputReleased(); // Método para manejar la entrada liberada en el script de Lane
       }
     }
 
@@ -79,6 +82,15 @@ namespace Script.Player
     private void OnDisable()
     {
       playerInput.Player.Disable();
+    }
+
+    private void OnDestroy()
+    {
+      // Cleanup for Unity 6 - better memory management
+      if (playerInput != null)
+      {
+        playerInput.Dispose();
+      }
     }
   }
 }
