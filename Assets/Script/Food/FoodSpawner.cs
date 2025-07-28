@@ -4,51 +4,63 @@ using UnityEngine;
 
 namespace Script.Food
 {
-  public class FoodSpawner : MonoBehaviour
-  { 
-    [Header("Configuración de spawn de comida")]
-    [SerializeField] private List<GameObject> foodPrefabs; // Lista de prefabs de comida
-    [SerializeField] private Transform spawnPosition; // Posición de spawn
-    [SerializeField] private float waitTime = 0.7f; // Tiempo de espera entre spawns
+    /// <summary>
+    /// Controla la generación automática de comida que se mueve por la pantalla.
+    /// Spawna objetos de comida de manera aleatoria y los mueve hasta destruirlos.
+    /// </summary>
+    public class FoodSpawner : MonoBehaviour
+    { 
+        #region Serialized Fields
+        [Header("Configuración de spawn de comida")]
+        [SerializeField] private List<GameObject> foodPrefabs;
+        [SerializeField] private Transform spawnPosition;
+        [SerializeField] private float waitTime = 0.7f;
 
-    [Header("Configuración de movimiento de comida")]
-    [SerializeField] private float moveSpeed = 10f; // Velocidad de movimiento de la comida
-    [SerializeField] private float despawnLimit = -25f; // Límite de despawn
+        [Header("Configuración de movimiento de comida")]
+        [SerializeField] private float moveSpeed = 10f;
+        [SerializeField] private float despawnLimit = -25f;
+        #endregion
 
-    private void Start()
-    {
-      StartCoroutine(SpawnFood());
+        #region Unity Lifecycle
+        /// <summary>
+        /// Inicia el proceso de spawning continuo de comida.
+        /// </summary>
+        private void Start()
+        {
+            StartCoroutine(SpawnFood());
+        }
+        #endregion
+
+        #region Private Methods
+        /// <summary>
+        /// Corrutina que spawna comida de manera infinita con intervalos de tiempo.
+        /// Selecciona aleatoriamente un prefab de comida y lo instancia.
+        /// </summary>
+        private IEnumerator SpawnFood()
+        {
+            while (true)
+            {
+                GameObject foodPrefab = foodPrefabs[Random.Range(0, foodPrefabs.Count)];
+                GameObject food = Instantiate(foodPrefab, spawnPosition.position, foodPrefab.transform.rotation);
+                StartCoroutine(MoveAndDestroyFood(food));
+                yield return new WaitForSeconds(waitTime);
+            }
+        }
+
+        /// <summary>
+        /// Mueve un objeto de comida hacia la izquierda y lo destruye al alcanzar el límite.
+        /// </summary>
+        /// <param name="food">Objeto de comida a mover</param>
+        private IEnumerator MoveAndDestroyFood(GameObject food)
+        {
+            while (food.transform.position.x > despawnLimit)
+            {
+                food.transform.position -= new Vector3(moveSpeed * Time.deltaTime, 0, 0);
+                yield return null;
+            }
+
+            Destroy(food);
+        }
+        #endregion
     }
-    
-    private IEnumerator SpawnFood()
-    {
-      while (true)
-      {
-        // Selecciona un prefab de comida de manera aleatoria
-        GameObject foodPrefab = foodPrefabs[Random.Range(0, foodPrefabs.Count)];
-
-        // Instancia la comida en la posición de spawn
-        GameObject food = Instantiate(foodPrefab, spawnPosition.position, foodPrefab.transform.rotation);
-
-        // Inicia una Coroutine para mover la comida y destruirla cuando alcance el límite de despawn
-        StartCoroutine(MoveAndDestroyFood(food));
-
-        // Espera un tiempo antes de spawnear la próxima comida
-        yield return new WaitForSeconds(waitTime);
-      }
-    }
-
-    private IEnumerator MoveAndDestroyFood(GameObject food)
-    {
-      // Mueve la comida hacia la izquierda hasta que alcanza el límite de despawn
-      while (food.transform.position.x > despawnLimit)
-      {
-        food.transform.position -= new Vector3(moveSpeed * Time.deltaTime, 0, 0);
-        yield return null;
-      }
-
-      // Destruye la comida
-      Destroy(food);
-    }
-  }
 }
