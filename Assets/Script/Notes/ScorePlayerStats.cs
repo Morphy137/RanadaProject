@@ -7,44 +7,101 @@ using UnityEngine.UI;
 
 namespace Script.Notes
 {
+  /// <summary>
+  /// Gestiona la pantalla de estadísticas del jugador al final de una canción.
+  /// Controla la animación de puntuaciones, rankings, sprites de mascotas y efectos de audio.
+  /// Proporciona feedback visual y auditivo basado en el rendimiento del jugador.
+  /// </summary>
   public class ScorePlayerStats : MonoBehaviour
   {
+    #region Serialized Fields
+    [Header("Sistema de Ranking")]
+    [Tooltip("Imagen donde se muestra el ranking obtenido")]
     [SerializeField] private Image setRanking;
-    [SerializeField] private List<Sprite> rankingScore; // 0 is S, 1 is A, 2 is B, 3 is C, 4 is D, 5 is E, 6 is F
+
+    [Tooltip("Lista de sprites de ranking: 0=S, 1=A, 2=B, 3=C, 4=D, 5=E, 6=F")]
+    [SerializeField] private List<Sprite> rankingScore;
 
     [Space(10)]
+    [Header("Mascotas - Pet")]
+    [Tooltip("Imagen de la mascota principal")]
     [SerializeField] private Image setModePet;
-    [SerializeField] private List<Sprite> petSprites; // 0 is Perfect, 1 is Great, 2 is Bad
+
+    [Tooltip("Lista de sprites de la mascota: 0=Perfect, 1=Great, 2=Bad")]
+    [SerializeField] private List<Sprite> petSprites;
 
     [Space(10)]
+    [Header("Mascotas - Dog")]
+    [Tooltip("Imagen de la mascota secundaria (perro)")]
     [SerializeField] private Image setModeDog;
+
+    [Tooltip("Lista de sprites del perro en diferentes estados")]
     [SerializeField] private List<Sprite> dogSprites;
 
     [Space(10)]
+    [Header("Interfaz de Puntuación")]
+    [Tooltip("Texto que muestra la puntuación final")]
     [SerializeField] private TextMeshProUGUI scoreText;
 
     [Space(10)]
+    [Header("Estadísticas de Precisión")]
+    [Tooltip("Texto para mostrar golpes perfectos (uyuuuy)")]
     [SerializeField] private TextMeshProUGUI uyuuuyText;
+
+    [Tooltip("Texto para mostrar golpes excelentes (bakan)")]
     [SerializeField] private TextMeshProUGUI bakanText;
+
+    [Tooltip("Texto para mostrar golpes buenos (wena)")]
     [SerializeField] private TextMeshProUGUI wenaText;
+
+    [Tooltip("Texto para mostrar golpes fallidos (pucha)")]
     [SerializeField] private TextMeshProUGUI puchaText;
 
     [Space(10)]
+    [Header("Audio de Ranking")]
+    [Tooltip("AudioSource para sonidos de ranking")]
     [SerializeField] private AudioSource rankAudioSource;
+
+    [Tooltip("Clip de audio para ranking S")]
     [SerializeField] private AudioClip sRankClip;
+
+    [Tooltip("Clip de audio para ranking A")]
     [SerializeField] private AudioClip aRankClip;
+
+    [Tooltip("Clip de audio para ranking B")]
     [SerializeField] private AudioClip bRankClip;
+
+    [Tooltip("Clip de audio para ranking C")]
     [SerializeField] private AudioClip cRankClip;
 
     [Space(10)]
+    [Header("Audio de Puntuación")]
+    [Tooltip("AudioSource para efectos de sonido de puntuación")]
     [SerializeField] private AudioSource scoreAudioSource;
+
+    [Tooltip("Clip de sonido que se reproduce al mostrar estadísticas")]
     [SerializeField] private AudioClip scoreClip;
+    #endregion
 
+    #region Private Fields
+    /// <summary>Número de golpes fallidos del jugador</summary>
     private int puchaScore;
-    private int wenaScore;
-    private int bakanScore;
-    private int uyuuuyScore;
 
+    /// <summary>Número de golpes buenos del jugador</summary>
+    private int wenaScore;
+
+    /// <summary>Número de golpes excelentes del jugador</summary>
+    private int bakanScore;
+
+    /// <summary>Número de golpes perfectos del jugador</summary>
+    private int uyuuuyScore;
+    #endregion
+
+    #region Unity Lifecycle
+    /// <summary>
+    /// Inicializa las estadísticas del jugador y comienza las animaciones de presentación.
+    /// Verifica la integridad de las referencias y configura los valores desde GlobalScore.
+    /// </summary>
     private void Start()
     {
       if (setModePet == null || petSprites == null || dogSprites == null || scoreText == null || setRanking == null || rankingScore == null)
@@ -71,10 +128,15 @@ namespace Script.Notes
 
       // Iniciar todas las animaciones de forma sincronizada
       StartCoroutine(UpdateSynchronized(0, GlobalScore.score, 2.5f));
-
       StartCoroutine(UpdateTextsInOrder(textFields, values, 0.3f));
     }
+    #endregion
 
+    #region Private Methods
+    /// <summary>
+    /// Reproduce el sonido correspondiente al ranking obtenido.
+    /// </summary>
+    /// <param name="targetIndex">Índice del ranking (0=S, 1=A, 2=B, 3=C, 4=D, 5=E, 6=F)</param>
     private void PlayRankingSound(int targetIndex)
     {
       // 0 is S, 1 is A, 2 is B, 3 is C, 4 is D, 5 is E, 6 is F
@@ -104,7 +166,16 @@ namespace Script.Notes
         default:
           break;
       }
-    }    // Nuevo método que sincroniza score, ranking y mascotas
+    }
+
+    /// <summary>
+    /// Corrutina principal que sincroniza la animación de puntuación, ranking y sprites de mascotas.
+    /// Actualiza todos los elementos visuales de forma coordinada durante la duración especificada.
+    /// </summary>
+    /// <param name="startScore">Puntuación inicial de la animación</param>
+    /// <param name="endScore">Puntuación final objetivo</param>
+    /// <param name="duration">Duración total de la animación en segundos</param>
+    /// <returns>Corrutina que maneja la animación sincronizada</returns>
     private IEnumerator UpdateSynchronized(int startScore, int endScore, float duration)
     {
       Debug.Log($"UpdateSynchronized iniciado: desde {startScore} hasta {endScore} en {duration} segundos");
@@ -176,7 +247,11 @@ namespace Script.Notes
       PlayRankingSound(finalRankingIndex);
     }
 
-    // Método auxiliar para debug
+    /// <summary>
+    /// Convierte un índice de ranking a su letra correspondiente para debug.
+    /// </summary>
+    /// <param name="index">Índice del ranking</param>
+    /// <returns>Letra del ranking (S, A, B, C, D, E, F)</returns>
     private string GetRankingLetter(int index)
     {
       switch (index)
@@ -192,7 +267,11 @@ namespace Script.Notes
       }
     }
 
-    // Método auxiliar para obtener el índice de ranking
+    /// <summary>
+    /// Determina el índice de ranking basado en la puntuación obtenida.
+    /// </summary>
+    /// <param name="score">Puntuación del jugador</param>
+    /// <returns>Índice del ranking correspondiente</returns>
     private int GetRankingIndex(int score)
     {
       if (score >= 70000) return 0; // S
@@ -204,7 +283,11 @@ namespace Script.Notes
       else return 6; // F
     }
 
-    // Método auxiliar para obtener los índices de mascotas
+    /// <summary>
+    /// Determina los índices de sprites de mascotas basado en la puntuación.
+    /// </summary>
+    /// <param name="score">Puntuación del jugador</param>
+    /// <returns>Tupla con los índices de pet y dog</returns>
     private (int pet, int dog) GetPetIndices(int score)
     {
       if (score >= 70000) return (0, 0); // S
@@ -217,6 +300,13 @@ namespace Script.Notes
       else return (2, 5); // F (menos de 10k)
     }
 
+    /// <summary>
+    /// Anima la aparición secuencial de los textos de estadísticas con efectos de sonido.
+    /// </summary>
+    /// <param name="textFields">Lista de campos de texto a actualizar</param>
+    /// <param name="values">Lista de valores correspondientes</param>
+    /// <param name="delay">Retraso entre cada actualización</param>
+    /// <returns>Corrutina que maneja la animación secuencial</returns>
     private IEnumerator UpdateTextsInOrder(List<TextMeshProUGUI> textFields, List<int> values, float delay)
     {
       for (int i = textFields.Count - 1; i >= 0; i--)
@@ -226,5 +316,6 @@ namespace Script.Notes
         yield return new WaitForSeconds(delay);
       }
     }
+    #endregion
   }
 }
