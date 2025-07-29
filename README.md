@@ -7,13 +7,13 @@
 ![MIDI](https://img.shields.io/badge/MIDI-Support-purple?style=for-the-badge&logo=music&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Game_Jump_Project-green?style=for-the-badge)
 
-_Un juego de ritmo donde la música se encuentra con la cocina_ 🎶
+_Un juego de ritmo que combina las ramadas con sus deliciosas comidas tipicas_ 🎶
 
 </div>
 
 ## 📖 Descripción
 
-**RanadaProject** es un innovador juego de ritmo desarrollado en Unity donde los jugadores deben presionar teclas al compás de la música para capturar ingredientes que caen del cielo. Con una adorable rana como protagonista, el juego combina mecánicas de rhythm game con una temática culinaria única y colorida basada en Chile.
+**RanadaProject** es un innovador juego de ritmo desarrollado en Unity donde los jugadores deben presionar teclas al compás de la música para ayudar a la rana a comer todo lo que pueda. Con una adorable rana chilena como protagonista, el juego combina mecánicas de rhythm game con una temática culinaria única y colorida basada en Chile.
 
 ### ✨ Características Principales
 
