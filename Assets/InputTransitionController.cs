@@ -8,6 +8,15 @@ namespace Script.Interface
     /// Controlador universal para transiciones activadas por cualquier entrada del jugador.
     /// Permite configurar listas de GameObjects que se activan/desactivan simultáneamente
     /// cuando se detecta cualquier input. Útil para "Presiona cualquier tecla para continuar".
+    /// 
+    /// CARACTERÍSTICAS DE CONTROL:
+    /// - autoActivateOnStart: Controla si se activa automáticamente al iniciar (recomendado: false para créditos, true para tutorial)
+    /// - onlyWhenGameObjectActive: Solo responde cuando el GameObject esté activo (recomendado: true)
+    /// - executeOnlyOnce: Se ejecuta una sola vez y luego se desactiva (recomendado: true)
+    /// 
+    /// USO RECOMENDADO:
+    /// TUTORIAL: autoActivateOnStart=true, onlyWhenGameObjectActive=true
+    /// CRÉDITOS: autoActivateOnStart=false, onlyWhenGameObjectActive=true, llamar ActivateInputListening() manualmente
     /// </summary>
     public class InputTransitionController : MonoBehaviour
     {
@@ -25,6 +34,12 @@ namespace Script.Interface
 
         [Tooltip("Si está marcado, el script se ejecutará solo una vez y luego se deshabilitará")]
         public bool executeOnlyOnce = true;
+
+        [Tooltip("Si está marcado, el script se activará automáticamente en Start()")]
+        public bool autoActivateOnStart = true;
+
+        [Tooltip("Si está marcado, solo responderá a inputs cuando este GameObject esté activo")]
+        public bool onlyWhenGameObjectActive = true;
         #endregion
 
         #region Private Fields
@@ -33,6 +48,9 @@ namespace Script.Interface
 
         /// <summary>Referencia al sistema de entrada del jugador</summary>
         private PlayerInput playerInput;
+
+        /// <summary>Indica si el Input System está actualmente activo</summary>
+        private bool inputSystemActive = false;
         #endregion
 
         #region Unity Lifecycle
@@ -42,7 +60,12 @@ namespace Script.Interface
         void Start()
         {
             transitionExecuted = false;
-            SetupInputSystem();
+
+            // Solo activar automáticamente si está configurado para hacerlo
+            if (autoActivateOnStart)
+            {
+                ActivateInputListening();
+            }
         }
 
         /// <summary>
@@ -50,15 +73,31 @@ namespace Script.Interface
         /// </summary>
         void OnDestroy()
         {
-            if (playerInput != null)
-            {
-                playerInput.Player.Lane1Key.performed -= OnAnyInput;
-                playerInput.Player.Lane2Key.performed -= OnAnyInput;
-                playerInput.Player.Click.performed -= OnAnyInput;
-                playerInput.Player.Pause.performed -= OnAnyInput;
+            DeactivateInputListening();
+        }
 
-                playerInput.Player.Disable();
-                playerInput.Dispose();
+        /// <summary>
+        /// Unity event: Se ejecuta cuando el GameObject se activa.
+        /// </summary>
+        void OnEnable()
+        {
+            // Si está configurado para activar solo cuando el GameObject esté activo
+            // y autoActivateOnStart está marcado, activar input listening
+            if (onlyWhenGameObjectActive && autoActivateOnStart && !inputSystemActive)
+            {
+                ActivateInputListening();
+            }
+        }
+
+        /// <summary>
+        /// Unity event: Se ejecuta cuando el GameObject se desactiva.
+        /// </summary>
+        void OnDisable()
+        {
+            // Si está configurado para responder solo cuando esté activo, desactivar listening
+            if (onlyWhenGameObjectActive && inputSystemActive)
+            {
+                DeactivateInputListening();
             }
         }
         #endregion
@@ -95,7 +134,11 @@ namespace Script.Interface
         /// <param name="context">Contexto de la acción de entrada</param>
         private void OnAnyInput(InputAction.CallbackContext context)
         {
-            if (!transitionExecuted)
+            // Verificar si debe responder (solo cuando el GameObject esté activo si está configurado)
+            if (onlyWhenGameObjectActive && !gameObject.activeInHierarchy)
+                return;
+
+            if (!transitionExecuted && inputSystemActive)
             {
                 ExecuteTransition();
             }
@@ -139,10 +182,10 @@ namespace Script.Interface
                 Debug.Log("Canción iniciada");
             }
 
-            // Limpiar Input System si se ejecuta solo una vez
+            // Desactivar input listening si se ejecuta solo una vez
             if (executeOnlyOnce)
             {
-                CleanupInputSystem();
+                DeactivateInputListening();
             }
 
             Debug.Log("Transición ejecutada correctamente");
@@ -177,6 +220,32 @@ namespace Script.Interface
 
         #region Public Methods
         /// <summary>
+        /// Activa la escucha de inputs. Útil para activar el sistema solo cuando sea necesario.
+        /// </summary>
+        public void ActivateInputListening()
+        {
+            if (!inputSystemActive)
+            {
+                SetupInputSystem();
+                inputSystemActive = true;
+                Debug.Log("Input listening activado para transición");
+            }
+        }
+
+        /// <summary>
+        /// Desactiva la escucha de inputs. Útil para evitar activaciones no deseadas.
+        /// </summary>
+        public void DeactivateInputListening()
+        {
+            if (inputSystemActive)
+            {
+                CleanupInputSystem();
+                inputSystemActive = false;
+                Debug.Log("Input listening desactivado para transición");
+            }
+        }
+
+        /// <summary>
         /// Método público para ejecutar la transición manualmente desde otros scripts o eventos UI.
         /// </summary>
         public void TriggerTransition()
@@ -193,10 +262,19 @@ namespace Script.Interface
         public void ResetTransition()
         {
             transitionExecuted = false;
-            if (playerInput == null)
+            if (playerInput == null && inputSystemActive)
             {
                 SetupInputSystem();
             }
+        }
+
+        /// <summary>
+        /// Verifica si el sistema de input está actualmente activo.
+        /// </summary>
+        /// <returns>True si está escuchando inputs, false si no</returns>
+        public bool IsInputListening()
+        {
+            return inputSystemActive;
         }
         #endregion
     }
